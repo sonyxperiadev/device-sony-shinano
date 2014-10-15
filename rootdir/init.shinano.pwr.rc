@@ -1,0 +1,134 @@
+# Copyright 2014 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+on property:sys.boot_completed=1
+    # Enable Power modes and set the CPU Freq Sampling rates
+    write /sys/module/lpm_resources/enable_low_power/l2 1
+    write /sys/module/lpm_resources/enable_low_power/pxo 1
+    write /sys/module/lpm_resources/enable_low_power/vdd_dig 1
+    write /sys/module/lpm_resources/enable_low_power/vdd_mem 1
+    write /sys/module/msm_pm/modes/cpu0/retention/idle_enabled 1
+    write /sys/module/msm_pm/modes/cpu1/retention/idle_enabled 1
+    write /sys/module/msm_pm/modes/cpu2/retention/idle_enabled 1
+    write /sys/module/msm_pm/modes/cpu3/retention/idle_enabled 1
+    write /sys/module/msm_pm/modes/cpu0/power_collapse/suspend_enabled 1
+    write /sys/module/msm_pm/modes/cpu1/power_collapse/suspend_enabled 1
+    write /sys/module/msm_pm/modes/cpu2/power_collapse/suspend_enabled 1
+    write /sys/module/msm_pm/modes/cpu3/power_collapse/suspend_enabled 1
+    write /sys/module/msm_pm/modes/cpu0/power_collapse/idle_enabled 1
+    write /sys/module/msm_pm/modes/cpu1/power_collapse/idle_enabled 1
+    write /sys/module/msm_pm/modes/cpu2/power_collapse/idle_enabled 1
+    write /sys/module/msm_pm/modes/cpu3/power_collapse/idle_enabled 1
+    write /sys/module/msm_pm/modes/cpu0/standalone_power_collapse/suspend_enabled 1
+    write /sys/module/msm_pm/modes/cpu1/standalone_power_collapse/suspend_enabled 1
+    write /sys/module/msm_pm/modes/cpu2/standalone_power_collapse/suspend_enabled 1
+    write /sys/module/msm_pm/modes/cpu3/standalone_power_collapse/suspend_enabled 1
+    write /sys/module/msm_pm/modes/cpu0/standalone_power_collapse/idle_enabled 1
+    write /sys/module/msm_pm/modes/cpu1/standalone_power_collapse/idle_enabled 1
+    write /sys/module/msm_pm/modes/cpu2/standalone_power_collapse/idle_enabled 1
+    write /sys/module/msm_pm/modes/cpu3/standalone_power_collapse/idle_enabled 1
+    write /sys/module/msm_thermal/core_control/enabled 0
+    write /sys/devices/system/cpu/cpu1/online 1
+    write /sys/devices/system/cpu/cpu2/online 1
+    write /sys/devices/system/cpu/cpu3/online 1
+
+    write /sys/module/cpu_boost/parameters/boost_ms 20
+    write /sys/module/cpu_boost/parameters/sync_threshold 1728000
+    write /sys/module/cpu_boost/parameters/input_boost_freq 1497600
+    write /sys/module/cpu_boost/parameters/input_boost_ms 40
+
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 300000
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq 300000
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq 300000
+    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq 300000
+    chown system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
+    chown system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
+    write /sys/module/msm_thermal/core_control/enabled 1
+    chown root system /sys/devices/system/cpu/mfreq
+    chmod 220 /sys/devices/system/cpu/mfreq
+    chown root system /sys/devices/system/cpu/cpu1/online
+    chown root system /sys/devices/system/cpu/cpu2/online
+    chown root system /sys/devices/system/cpu/cpu3/online
+    chmod 664 /sys/devices/system/cpu/cpu1/online
+    chmod 664 /sys/devices/system/cpu/cpu2/online
+    chmod 664 /sys/devices/system/cpu/cpu3/online
+    write /dev/cpuctl/apps/cpu.notify_on_migrate 1
+
+    # set DCVS parameters for CPU
+    write /sys/module/msm_dcvs/cores/cpu0/slack_time_max_us 40000
+    write /sys/module/msm_dcvs/cores/cpu0/slack_time_min_us 40000
+    write /sys/module/msm_dcvs/cores/cpu0/em_win_size_min_us 100000
+    write /sys/module/msm_dcvs/cores/cpu0/em_win_size_max_us 500000
+    write /sys/module/msm_dcvs/cores/cpu0/slack_mode_dynamic 0
+    write /sys/module/msm_dcvs/cores/cpu0/disable_pc_threshold 1000000
+    write /sys/module/msm_dcvs/cores/cpu1/slack_time_max_us 25000
+    write /sys/module/msm_dcvs/cores/cpu1/slack_time_min_us 25000
+    write /sys/module/msm_dcvs/cores/cpu1/em_win_size_min_us 100000
+    write /sys/module/msm_dcvs/cores/cpu1/em_win_size_max_us 500000
+    write /sys/module/msm_dcvs/cores/cpu1/slack_mode_dynamic 0
+    write /sys/module/msm_dcvs/cores/cpu1/disable_pc_threshold 1000000
+    write /sys/module/msm_dcvs/cores/cpu2/slack_time_max_us 25000
+    write /sys/module/msm_dcvs/cores/cpu2/slack_time_min_us 25000
+    write /sys/module/msm_dcvs/cores/cpu2/em_win_size_min_us 100000
+    write /sys/module/msm_dcvs/cores/cpu2/em_win_size_max_us 500000
+    write /sys/module/msm_dcvs/cores/cpu2/slack_mode_dynamic 0
+    write /sys/module/msm_dcvs/cores/cpu2/disable_pc_threshold 1000000
+    write /sys/module/msm_dcvs/cores/cpu3/slack_time_max_us 25000
+    write /sys/module/msm_dcvs/cores/cpu3/slack_time_min_us 25000
+    write /sys/module/msm_dcvs/cores/cpu3/em_win_size_min_us 100000
+    write /sys/module/msm_dcvs/cores/cpu3/em_win_size_max_us 500000
+    write /sys/module/msm_dcvs/cores/cpu3/slack_mode_dynamic 0
+    write /sys/module/msm_dcvs/cores/cpu3/disable_pc_threshold 1000000
+
+    # set DCVS parameters for GPU
+    write /sys/module/msm_dcvs/cores/gpu0/slack_time_max_us 20000
+    write /sys/module/msm_dcvs/cores/gpu0/slack_time_min_us 20000
+    write /sys/module/msm_dcvs/cores/gpu0/slack_mode_dynamic 0
+
+    # set msm_mpdecision parameters
+    write /sys/module/msm_mpdecision/slack_time_max_us 45000
+    write /sys/module/msm_mpdecision/slack_time_min_us 15000
+    write /sys/module/msm_mpdecision/em_win_size_min_us 100000
+    write /sys/module/msm_mpdecision/em_win_size_max_us 1000000
+    write /sys/module/msm_mpdecision/online_util_pct_min 3
+    write /sys/module/msm_mpdecision/online_util_pct_max 25
+    write /sys/module/msm_mpdecision/em_max_util_pct 97
+    write /sys/module/msm_mpdecision/rq_avg_poll_ms 2
+    write /sys/module/msm_mpdecision/mp_em_rounding_point_min 10
+    write /sys/module/msm_mpdecision/mp_em_rounding_point_max 85
+    write /sys/module/msm_mpdecision/iowait_threshold_pct 50
+
+    # set permissions for the nodes needed by display on/off hook
+    chown system /sys/module/msm_dcvs/cores/cpu0/slack_time_max_us
+    chown system /sys/module/msm_dcvs/cores/cpu0/slack_time_min_us
+    chown system /sys/module/msm_mpdecision/slack_time_max_us
+    chown system /sys/module/msm_mpdecision/slack_time_min_us
+    chmod 664 /sys/module/msm_dcvs/cores/cpu0/slack_time_max_us
+    chmod 664 /sys/module/msm_dcvs/cores/cpu0/slack_time_min_us
+    chmod 664 /sys/module/msm_mpdecision/slack_time_max_us
+    chmod 664 /sys/module/msm_mpdecision/slack_time_min_us
+
+    # Set scaling governor to "interactive"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "interactive"
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "interactive"
+    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor "interactive"
+    write /sys/devices/system/cpu/cpufreq/interactive/io_is_busy 1
+    write /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay "20000 1400000:40000 1700000:20000"
+    write /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load 90
+    write /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq 1190400
+    write /sys/devices/system/cpu/cpufreq/interactive/target_loads "85 1500000:90 1800000:70"
+    write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 40000
+    write /sys/devices/system/cpu/cpufreq/interactive/sampling_down_factor 100000
+
