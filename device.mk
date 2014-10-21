@@ -102,7 +102,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libtinyalsa \
     libtinycompress \
-    libaudioroute
+    libaudioroute \
+    tfa9890_amp
 
 #GFX
 PRODUCT_PACKAGES += \
