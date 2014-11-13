@@ -59,21 +59,18 @@ TARGET_USES_ION := true
 USE_DEVICE_SPECIFIC_CAMERA := true
 
 # Wi-Fi definitions for Broadcom solution
-BOARD_HAS_QCOM_WLAN := false
-BOARD_HAS_ATH_WLAN_AR6004 := false
 BOARD_WLAN_DEVICE           := bcmdhd
-BOARD_WLAN_DEVICE_REV       := bcm4339
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
 WPA_SUPPLICANT_VERSION      := VER_0_8_X
 BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_bcmdhd
 BOARD_HOSTAPD_DRIVER        := NL80211
 BOARD_HOSTAPD_PRIVATE_LIB   := lib_driver_cmd_bcmdhd
-WIFI_DRIVER_MODULE_PATH     := "/system/lib/modules/bcm4339.ko"
+WIFI_DRIVER_MODULE_PATH     := "/system/lib/modules/bcmdhd.ko"
 WIFI_DRIVER_MODULE_ARG      := "nvram_path=/system/etc/firmware/wlan/bcmdhd/bcmdhd.cal"
 WIFI_DRIVER_MODULE_NAME     := "wlan"
 WIFI_DRIVER_FW_PATH_PARAM   := "/sys/module/wlan/parameters/firmware_path"
-WIFI_DRIVER_FW_PATH_STA     := "/system/etc/firmware/wlan/bcmdhd/bcm4339_sta.bin"
-WIFI_DRIVER_FW_PATH_AP      := "/system/etc/firmware/wlan/bcmdhd/bcm4339_aps.bin"
+WIFI_DRIVER_FW_PATH_STA     := "/system/etc/firmware/wlan/bcmdhd/fw_bcmdhd.bin"
+WIFI_DRIVER_FW_PATH_AP      := "/system/etc/firmware/wlan/bcmdhd/fw_bcmdhd_apsta.bin"
 
 # BT definitions for Broadcom solution
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/sony/shinano/bluetooth
