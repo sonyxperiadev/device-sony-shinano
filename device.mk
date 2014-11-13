@@ -26,6 +26,7 @@ PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/fstab.shinano:root/fstab.shinano \
     $(SONY_ROOT)/ueventd.shinano.rc:root/ueventd.shinano.rc \
     $(SONY_ROOT)/system/usr/idc/max1187x_touchscreen_0.idc:system/usr/idc/max1187x_touchscreen_0.idc \
+    $(SONY_ROOT)/system/usr/idc/clearpad.idc:system/usr/idc/clearpad.idc \
     $(SONY_ROOT)/system/etc/bcmdhd.cal:system/etc/firmware/wlan/bcmdhd/bcmdhd.cal \
     $(SONY_ROOT)/system/etc/bluetooth/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf \
     $(SONY_ROOT)/system/etc/media_codecs.xml:system/etc/media_codecs.xml \
