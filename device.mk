@@ -131,7 +131,6 @@ PRODUCT_PACKAGES += \
 
 #WLAN
 PRODUCT_PACKAGES += \
-    bcm4339.ko \
     p2p_supplicant.conf \
     gsm_domains.conf \
     hostapd \
