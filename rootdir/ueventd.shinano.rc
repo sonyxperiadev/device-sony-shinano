@@ -128,6 +128,16 @@
 /dev/tsc_mux0             0660   media       media
 /dev/tsc_ci0              0660   media       media
 
+#leds
+/sys/devices/01-qcom,leds-d000/leds/led:* max_brightness 0644 root system
+/sys/devices/01-qcom,leds-d000/leds/led:* brightness 0664 system system
+/sys/devices/01-qcom,leds-d000/leds/led:* lut_pwm 0664 system system
+/sys/devices/01-qcom,leds-d000/leds/led:* step_duration 0664 system system
+/sys/devices/01-qcom,leds-d000/leds/rgb start_blink 0220 system system
+/sys/devices/01-qcom,leds-d000/leds/rgb sync_state 0664 system system
+/sys/devices/01-qcom,leds-d800/leds/wled:backlight max_brightness 0644 root system
+/sys/devices/01-qcom,leds-d800/leds/wled:backlight brightness 0664 system system
+
 # sensors
 /sys/devices/i2c-12/12-*  pollrate_ms 0664 system system
 /sys/devices/f9925000.i2c/i2c-0/0-* enable          0660     input     system
