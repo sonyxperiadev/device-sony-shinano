@@ -17,7 +17,7 @@
 #ifndef _BDROID_BUILDCFG_H
 #define _BDROID_BUILDCFG_H
 
-#define BTA_AV_CO_CP_SCMS_T   TRUE
+/* #define BTA_AV_CO_CP_SCMS_T   TRUE */
 #define SDP_AVRCP_1_5   FALSE
 
 #endif
