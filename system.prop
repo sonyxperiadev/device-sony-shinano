@@ -125,4 +125,3 @@ wifi.interface=wlan0
 
 # Enable Power save functionality for modem
 persist.radio.add_power_save=1
-ro.telephony.ril_class=QualcommSharedRIL
