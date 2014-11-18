@@ -163,6 +163,12 @@ on early-boot
     setrlimit 8 67108864 67108864
 
 on boot
+    # Panel backlight
+    chown system system /sys/class/leds/wled:backlight/brightness
+    chmod 660 /sys/class/leds/wled:backlight/brightness
+    chown system system /sys/class/leds/wled:backlight/max_brightness
+    chmod 660 /sys/class/leds/wled:backlight/max_brightness
+
     chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
