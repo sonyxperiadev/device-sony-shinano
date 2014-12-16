@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+$(call inherit-product, device/sony/msm8974_common/common.mk)
+
 SOMC_PLATFORM := shinano
 
 DEVICE_PACKAGE_OVERLAYS += \
@@ -103,15 +105,6 @@ PRODUCT_PACKAGES += \
     libtinycompress \
     libaudioroute
 
-#GFX
-PRODUCT_PACKAGES += \
-    gralloc.msm8974 \
-    hwcomposer.msm8974 \
-    memtrack.msm8974 \
-    libgenlock \
-    libqdutils \
-    libqdMetaData
-
 PRODUCT_PACKAGES += \
     lights.shinano
 
@@ -140,42 +133,8 @@ PRODUCT_PACKAGES += \
     wpa_supplicant.conf
 
 PRODUCT_PACKAGES += \
-    libmiscta \
-    libta \
-    tad_static \
-    ta_qmi_service
-
-PRODUCT_PACKAGES += \
     thermanager \
     bt_addr
-
-PRODUCT_PACKAGES += \
-    rmt_storage
-
-#Charger
-PRODUCT_PACKAGES += \
-    charger \
-    charger_res_images \
-
-PRODUCT_PACKAGES += \
-    librs_jni \
-    com.android.future.usb.accessory
-
-PRODUCT_PACKAGES += \
-    Dialer \
-    Email \
-    Exchange2 \
-    InCallUI \
-    Launcher3
-
-# Filesystem management tools
-PRODUCT_PACKAGES += \
-    e2fsck
-
-PRODUCT_TAGS += dalvik.gc.type-precise
-
-# APN list
-PRODUCT_COPY_FILES += device/sample/etc/apns-full-conf.xml:system/etc/apns-conf.xml
 
 PRODUCT_PROPERTY_OVERRIDES += \
     keyguard.no_require_sim=true

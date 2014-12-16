@@ -58,6 +58,10 @@ on init
     chown bluetooth net_bt_admin /proc/bluetooth/wakeup/proto
     chmod 0660 /proc/bluetooth/wakeup/proto
 
+    # start recovery-switch script
+    start recovery
+    wait /dev/.recovery_aborted 9999999
+
 on fs
     mount_all ./fstab.shinano
     setprop ro.crypto.fuse_sdcard true
@@ -159,6 +163,12 @@ on early-boot
     setrlimit 8 67108864 67108864
 
 on boot
+    # Panel backlight
+    chown system system /sys/class/leds/wled:backlight/brightness
+    chmod 660 /sys/class/leds/wled:backlight/brightness
+    chown system system /sys/class/leds/wled:backlight/max_brightness
+    chmod 660 /sys/class/leds/wled:backlight/max_brightness
+
     chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
@@ -418,6 +428,16 @@ service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw
 
 service fuse_usbdisk /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/usbdisk /storage/usbdisk
     class late_start
+    disabled
+
+# launched by on-init, continues if user does not want
+# to enter recovery
+service recovery /sbin/busybox_static sh /recovery.sh
+    class main
+    user root
+    group root
+    oneshot
+    seclabel u:r:recovery:s0
     disabled
 
 on property:bluetooth.isEnabled=true
