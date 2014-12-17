@@ -67,10 +67,10 @@ BOARD_HOSTAPD_DRIVER        := NL80211
 BOARD_HOSTAPD_PRIVATE_LIB   := lib_driver_cmd_bcmdhd
 WIFI_DRIVER_MODULE_PATH     := "/system/lib/modules/bcmdhd.ko"
 WIFI_DRIVER_MODULE_ARG      := "nvram_path=/system/etc/firmware/wlan/bcmdhd/bcmdhd.cal"
-WIFI_DRIVER_MODULE_NAME     := "wlan"
-WIFI_DRIVER_FW_PATH_PARAM   := "/sys/module/wlan/parameters/firmware_path"
-WIFI_DRIVER_FW_PATH_STA     := "/system/etc/firmware/wlan/bcmdhd/fw_bcmdhd.bin"
-WIFI_DRIVER_FW_PATH_AP      := "/system/etc/firmware/wlan/bcmdhd/fw_bcmdhd_apsta.bin"
+WIFI_DRIVER_MODULE_NAME     := "bcmdhd"
+WIFI_DRIVER_FW_PATH_PARAM   := "/sys/module/bcmdhd/parameters/firmware_path"
+WIFI_DRIVER_FW_PATH_AP      := "/vendor/firmware/fw_bcmdhd_apsta.bin"
+WIFI_DRIVER_FW_PATH_STA     := "/vendor/firmware/fw_bcmdhd.bin"
 
 # BT definitions for Broadcom solution
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/sony/shinano/bluetooth
