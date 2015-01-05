@@ -354,6 +354,13 @@ service bt_addr /system/bin/bt_addr
     group root
     oneshot
 
+#TFA AMP
+service tfa9890_amp /system/bin/tfa9890_amp
+    class late_start
+    user root
+    group root
+    oneshot
+
 service wpa_supplicant /system/bin/wpa_supplicant \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
     -O/data/misc/wifi/sockets \

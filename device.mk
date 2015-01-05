@@ -32,7 +32,8 @@ PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/system/etc/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf \
     $(SONY_ROOT)/system/etc/media_codecs.xml:system/etc/media_codecs.xml \
     $(SONY_ROOT)/system/etc/media_profiles.xml:system/etc/media_profiles.xml \
-    $(SONY_ROOT)/system/etc/audio_policy.conf:system/etc/audio_policy.conf
+    $(SONY_ROOT)/system/etc/audio_policy.conf:system/etc/audio_policy.conf \
+    $(SONY_ROOT)/system/etc/audio_platform_info.xml:system/etc/audio_platform_info.xml
 
 PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/system/etc/tfa98xx/coldboot.patch:/system/etc/tfa98xx/coldboot.patch \
@@ -60,7 +61,10 @@ PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/system/etc/tfa98xx/VoiceCallSpeaker_top.eq:/system/etc/tfa98xx/VoiceCallSpeaker_top.eq \
     $(SONY_ROOT)/system/etc/tfa98xx/VoiceCallSpeaker_btm.eq:/system/etc/tfa98xx/VoiceCallSpeaker_btm.eq \
     $(SONY_ROOT)/system/etc/tfa98xx/FMSpeaker_top.eq:/system/etc/tfa98xx/FMSpeaker_top.eq \
-    $(SONY_ROOT)/system/etc/tfa98xx/FMSpeaker_btm.eq:/system/etc/tfa98xx/FMSpeaker_btm.eq
+    $(SONY_ROOT)/system/etc/tfa98xx/FMSpeaker_btm.eq:/system/etc/tfa98xx/FMSpeaker_btm.eq \
+    $(SONY_ROOT)/system/etc/tfa98xx/TFA9890_Receiver.config:/system/etc/tfa98xx/TFA9890_Receiver.config \
+    $(SONY_ROOT)/system/etc/tfa98xx/VoiceCallEarpice_top.preset:/system/etc/tfa98xx/VoiceCallEarpice_top.preset \
+    $(SONY_ROOT)/system/etc/tfa98xx/VoiceCallEarpice_top.eq:/system/etc/tfa98xx/VoiceCallEarpice_top.eq
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
@@ -103,6 +107,7 @@ PRODUCT_PACKAGES += \
     libtinyalsa \
     libtinycompress \
     libaudioroute \
+    tinymix \
     tfa9890_amp
 
 #GFX
