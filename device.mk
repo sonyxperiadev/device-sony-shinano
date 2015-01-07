@@ -33,7 +33,8 @@ PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/system/etc/media_codecs.xml:system/etc/media_codecs.xml \
     $(SONY_ROOT)/system/etc/media_profiles.xml:system/etc/media_profiles.xml \
     $(SONY_ROOT)/system/etc/audio_policy.conf:system/etc/audio_policy.conf \
-    $(SONY_ROOT)/system/etc/audio_platform_info.xml:system/etc/audio_platform_info.xml
+    $(SONY_ROOT)/system/etc/audio_platform_info.xml:system/etc/audio_platform_info.xml \
+    $(SONY_ROOT)/system/etc/mixer_paths.xml:system/etc/mixer_paths.xml
 
 PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/system/etc/tfa98xx/coldboot.patch:/system/etc/tfa98xx/coldboot.patch \
