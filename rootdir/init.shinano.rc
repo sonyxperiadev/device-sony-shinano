@@ -328,6 +328,11 @@ service sct_service /system/bin/sct_service
     user root
     class main
 
+#QCOM prop
+service mlog_qmi_service /system/bin/mlog_qmi_service
+    user root
+    class main
+
 #Camera
 service qcamerasvr /system/bin/mm-qcamera-daemon
     class late_start
