@@ -154,6 +154,13 @@ on post-fs-data
 
     setprop vold.post_fs_data_done 1
 
+on charger
+    # Booting modem
+    wait /dev/block/platform/msm_sdcc.1/by-name/system
+    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/system /system ro barrier=1
+    start rmt_storage
+    start irsc_util
+
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
@@ -442,3 +449,8 @@ on property:bluetooth.isEnabled=true
 
 on property:init.svc.wpa_supplicant=stopped
     stop dhcpcd
+
+service charger /sbin/healthd -c
+    class charger
+    critical
+    seclabel u:r:healthd:s0
