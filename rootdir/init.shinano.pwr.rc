@@ -76,6 +76,9 @@ on property:init.svc.bootanim=stopped
 
     write /sys/block/mmcblk0/queue/scheduler row
 
+    setprop ro.qualcomm.perf.cores_online 2
+    start mpdecision
+
 on property:init.svc.bootanim=running
     # Switch to NOOP while booting
     write /sys/block/mmcblk0/queue/scheduler noop

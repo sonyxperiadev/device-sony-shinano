@@ -458,3 +458,9 @@ service charger /sbin/healthd -c
     class charger
     critical
     seclabel u:r:healthd:s0
+
+service mpdecision /system/bin/mpdecision --avg_comp
+    class main
+    user root
+    group system
+    disabled
