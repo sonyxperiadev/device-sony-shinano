@@ -134,6 +134,9 @@ PRODUCT_PACKAGES += \
     wpa_supplicant.conf
 
 PRODUCT_PACKAGES += \
+    keystore.msm8974
+
+PRODUCT_PACKAGES += \
     libmiscta \
     libta \
     tad_static \
