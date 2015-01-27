@@ -91,3 +91,7 @@ BOARD_NFC_HAL_SUFFIX := $(TARGET_BOARD_PLATFORM)
 
 # Include an expanded selection of fonts
 EXTENDED_FONT_FOOTPRINT := true
+
+# Enable dex-preoptimization to speed up first boot sequence
+WITH_DEXPREOPT := true
+
