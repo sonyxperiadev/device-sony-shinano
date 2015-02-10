@@ -362,12 +362,6 @@ service thermanager /system/bin/thermanager /system/etc/thermanager.xml
     user root
     group root
 
-#GNSS/Sensor interface daemon
-service gsiff_daemon /system/bin/gsiff_daemon
-    class late_start
-    user gps
-    group gps net_raw misc
-
 #OSS BT setup
 service bt_addr /system/bin/bt_addr
     class late_start
