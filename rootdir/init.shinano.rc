@@ -79,6 +79,9 @@ on post-fs-data
     #Create directory for hostapd
     mkdir /data/hostapd 0770 system wifi
 
+    # Create /data/time folder for time-services
+    mkdir /data/time/ 0700 system system
+
     # Create directory used by audio subsystem
     mkdir /data/misc/audio 0770 audio audio
 
@@ -452,3 +455,8 @@ service charger /sbin/healthd -c
     class charger
     critical
     seclabel u:r:healthd:s0
+
+service time_daemon /system/bin/time_daemon
+   class late_start
+   user root
+   group root
