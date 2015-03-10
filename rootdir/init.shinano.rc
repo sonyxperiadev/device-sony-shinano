@@ -363,11 +363,10 @@ service thermanager /system/bin/thermanager /system/etc/thermanager.xml
     user root
     group root
 
-#OSS BT setup
-service bt_addr /system/bin/bt_addr
-    class late_start
+#OSS WLAN setup
+service addrsetup /system/bin/addrsetup /sys/devices/platform/bcmdhd_wlan/macaddr
+    class main
     user root
-    group root
     oneshot
 
 #TFA AMP

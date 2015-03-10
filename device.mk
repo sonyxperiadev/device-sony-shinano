@@ -158,7 +158,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     thermanager \
-    bt_addr
+    addrsetup
 
 PRODUCT_PACKAGES += \
     rmt_storage
