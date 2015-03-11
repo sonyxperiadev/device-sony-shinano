@@ -110,6 +110,9 @@ PRODUCT_PACKAGES += \
     libqdutils \
     libqdMetaData
 
+PRODUCT_PACKAGES += \
+    libion
+
 #OMX
 PRODUCT_PACKAGES += \
     libc2dcolorconvert \
