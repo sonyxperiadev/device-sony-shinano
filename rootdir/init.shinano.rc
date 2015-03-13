@@ -452,6 +452,7 @@ service charger /sbin/healthd -c
     seclabel u:r:healthd:s0
 
 service timekeep /system/bin/timekeep restore
-   class late_start
-   user root
-   group root
+    class late_start
+    user root
+    group root
+    oneshot
