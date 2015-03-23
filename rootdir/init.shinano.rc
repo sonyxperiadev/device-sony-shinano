@@ -17,6 +17,7 @@ import init.shinano.pwr.rc
 
 on early-init
     mount debugfs debugfs /sys/kernel/debug
+    chmod 644 /proc/cmdline
 
 on init
     mkdir /tmp
