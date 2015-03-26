@@ -76,6 +76,8 @@
 /dev/ttyGS0               0660   system     system
 /dev/i2c-5                0660   media      media
 /dev/voice_svc            0660   system     audio
+/dev/video32              0660   system     camera
+/dev/video33              0660   system     camera
 /sys/devices/virtual/smdpkt/smdcntl* open_timeout 0664 radio  radio
 
 # BT
