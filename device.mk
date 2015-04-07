@@ -18,10 +18,10 @@ DEVICE_PACKAGE_OVERLAYS += \
     device/sony/shinano/overlay
 
 SONY_ROOT = device/sony/shinano/rootdir
+
 PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/init.recovery.shinano.rc:root/init.recovery.shinano.rc \
     $(SONY_ROOT)/init.shinano.rc:root/init.shinano.rc \
-    $(SONY_ROOT)/init.shinano.usb.rc:root/init.shinano.usb.rc \
     $(SONY_ROOT)/init.shinano.pwr.rc:root/init.shinano.pwr.rc \
     $(SONY_ROOT)/fstab.shinano:root/fstab.shinano \
     $(SONY_ROOT)/ueventd.shinano.rc:root/ueventd.shinano.rc \
