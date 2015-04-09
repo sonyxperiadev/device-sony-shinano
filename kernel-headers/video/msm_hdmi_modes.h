@@ -1,4 +1,4 @@
-#ifndef __MSM_HDMI_MODES_H__
-#define __MSM_HDMI_MODES_H__
+#ifndef __COMPAT_VIDEO_MSM_HDMI_MODES_H
+#define __COMPAT_VIDEO_MSM_HDMI_MODES_H
 #include <uapi/video/msm_hdmi_modes.h>
-#endif /* __MSM_HDMI_MODES_H__ */
+#endif

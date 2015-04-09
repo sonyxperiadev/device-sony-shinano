@@ -18,9 +18,10 @@
 #ifndef _LINUX_ION_H
 #define _LINUX_ION_H
 
-#include <uapi/linux/ion.h>
+#include <uapi/ion.h>
 
-#ifdef __KERNEL__
+#define CONFIG_ION
+
 struct ion_handle;
 struct ion_device;
 struct ion_heap;
@@ -32,7 +33,7 @@ struct ion_buffer;
    plumbed in the kernel, and all instances of ion_phys_addr_t should
    be converted to phys_addr_t.  For the time being many kernel interfaces
    do not accept phys_addr_t's that would have to */
-//#define ion_phys_addr_t dma_addr_t
+#define ion_phys_addr_t unsigned long
 
 /**
  * struct ion_platform_heap - defines a heap in the given platform
@@ -216,8 +217,8 @@ static inline void ion_reserve(struct ion_platform_data *data)
 
 }
 
-static inline struct ion_client *ion_client_create(struct ion_device *dev,
-				     unsigned int heap_mask, const char *name)
+static inline struct ion_client *ion_client_create(
+	struct ion_device *dev, unsigned int heap_id_mask, const char *name)
 {
 	return ERR_PTR(-ENODEV);
 }
@@ -226,7 +227,7 @@ static inline void ion_client_destroy(struct ion_client *client) { }
 
 static inline struct ion_handle *ion_alloc(struct ion_client *client,
 					size_t len, size_t align,
-					unsigned int heap_mask,
+					unsigned int heap_id_mask,
 					unsigned int flags)
 {
 	return ERR_PTR(-ENODEV);
@@ -274,5 +275,4 @@ static inline int ion_handle_get_flags(struct ion_client *client,
 }
 
 #endif /* CONFIG_ION */
-#endif /* __KERNEL__ */
 #endif /* _LINUX_ION_H */
