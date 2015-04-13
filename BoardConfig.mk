@@ -94,3 +94,6 @@ EXTENDED_FONT_FOOTPRINT := true
 # Enable dex-preoptimization to speed up first boot sequence
 WITH_DEXPREOPT := true
 
+BUILD_KERNEL := true
+-include vendor/sony/kernel/KernelConfig.mk
+
