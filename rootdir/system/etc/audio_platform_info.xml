@@ -26,17 +26,33 @@
 <!-- IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                          -->
 <audio_platform_info>
     <acdb_ids>
-        <!-- empty -->
+        <!-- Output devices -->
+        <device name="SND_DEVICE_OUT_SPEAKER" acdb_id="15" />
+        <device name="SND_DEVICE_OUT_SPEAKER_AND_HEADPHONES" acdb_id="15" />
+        <device name="SND_DEVICE_OUT_VOICE_SPEAKER" acdb_id="15" />
+        <device name="SND_DEVICE_OUT_VOIP_HANDSET" acdb_id="7" />
+        <device name="SND_DEVICE_OUT_VOIP_SPEAKER" acdb_id="15" />
+        <device name="SND_DEVICE_OUT_VOIP_HEADPHONES" acdb_id="10" />
+
+        <!-- Input devices -->
+        <device name="SND_DEVICE_IN_CAMCORDER_MIC" acdb_id="544" />
+        <device name="SND_DEVICE_IN_VOICE_REC_MIC" acdb_id="528" />
     </acdb_ids>
 
     <backend_names>
+        <!-- Output devices -->
+        <device name="SND_DEVICE_OUT_HANDSET" backend="handset" />
         <device name="SND_DEVICE_OUT_SPEAKER" backend="speaker" />
-        <device name="SND_DEVICE_OUT_SPEAKER_REVERSE" backend="speaker-reverse" />
+        <device name="SND_DEVICE_OUT_SPEAKER_REVERSE" backend="speaker" />
         <device name="SND_DEVICE_OUT_SPEAKER_AND_HEADPHONES" backend="speaker-and-headphones" />
-        <device name="SND_DEVICE_OUT_VOICE_SPEAKER" backend="voice-speaker" />
-        <device name="SND_DEVICE_OUT_SPEAKER_AND_ANC_HEADSET" backend="speaker-and-anc-headphones" />
-        <device name="SND_DEVICE_OUT_SPEAKER_PROTECTED" backend="speaker-protected" />
-        <device name="SND_DEVICE_OUT_VOIP_SPEAKER" backend="voip-speaker-comm" />
+        <device name="SND_DEVICE_OUT_VOICE_HANDSET" backend="handset" />
+        <device name="SND_DEVICE_OUT_VOICE_SPEAKER" backend="speaker" />
+        <device name="SND_DEVICE_OUT_VOICE_TTY_HCO_HANDSET" backend="handset" />
+        <device name="SND_DEVICE_OUT_SPEAKER_AND_ANC_HEADSET" backend="speaker-anc-nc-headphone" />
+        <device name="SND_DEVICE_OUT_VOIP_HANDSET" backend="handset" />
+        <device name="SND_DEVICE_OUT_VOIP_SPEAKER" backend="speaker" />
+
+        <!-- Input devices -->
     </backend_names>
 
     <pcm_ids>
@@ -44,6 +60,12 @@
     </pcm_ids>
 
     <device_names>
-        <!-- empty -->
+        <!-- Output devices -->
+        <device name="SND_DEVICE_OUT_VOIP_HANDSET" alias="voice-handset" />
+        <device name="SND_DEVICE_OUT_VOIP_SPEAKER" alias="voice-speaker" />
+        <device name="SND_DEVICE_OUT_VOIP_HEADPHONES" alias="voice-headphones" />
+
+        <!-- Input devices -->
+        <device name="SND_DEVICE_IN_VOICE_REC_MIC" alias="handset-mic-asr" />
     </device_names>
 </audio_platform_info>
