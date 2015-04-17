@@ -195,6 +195,8 @@
         <item>60</item>
     </integer-array>
 
+    <bool name="config_enableWifiDisplay">true</bool>
+
     <!-- Wifi driver supports batched scan -->
     <bool translatable="false" name="config_wifi_batched_scan_supported">true</bool>
 
