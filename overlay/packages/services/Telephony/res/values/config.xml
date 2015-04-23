@@ -20,10 +20,6 @@
 <!-- Phone app resources that may need to be customized
      for different hardware or product builds. -->
 <resources>
-    <!-- Flag indicating if the phone is a world phone -->
-    <!-- If true, will enable CDMA options, so make sure it's FALSE! -->
-    <bool name="world_phone">false</bool>
-
     <!-- Determine whether calls to mute the microphone in PhoneUtils
          are routed through the android.media.AudioManager class (true) or through
          the com.android.internal.telephony.Phone interface (false). -->
