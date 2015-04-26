@@ -30,6 +30,7 @@ on init
 
     mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
     mkdir /mnt/media_rw/usbdisk 0700 media_rw media_rw
+    mkdir /storage/usbdisk 0700 root root
 
     export EXTERNAL_STORAGE /storage/emulated/legacy
     export SECONDARY_STORAGE /storage/sdcard1
