@@ -112,10 +112,6 @@ on post-fs-data
     mkdir /data/misc/location/mq 0770 gps gps
     mkdir /data/misc/location/xtwifi 0770 gps gps
 
-    # NFC local data and nfcee xml storage
-    mkdir /data/nfc 0770 nfc nfc
-    mkdir /data/nfc/param 0770 nfc nfc
-
     #Create directory from IMS services
     mkdir /data/shared 0755
     chown system system /data/shared
