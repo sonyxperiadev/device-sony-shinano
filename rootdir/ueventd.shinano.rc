@@ -74,7 +74,6 @@
 /dev/sdio_tty_ciq_00      0660   system     system
 /dev/tty_sdio_00          0660   system     system
 /dev/ttyGS0               0660   system     system
-/dev/i2c-5                0660   media      media
 /dev/voice_svc            0660   system     audio
 /dev/video32              0660   system     camera
 /dev/video33              0660   system     camera
@@ -87,8 +86,7 @@
 /sys/devices/platform/msm_serial_hs.0/clock 0660 bluetooth bluetooth
 
 # NFC
-/dev/nfc-nci                                        0660 nfc nfc
-/dev/pn544                                          0660 nfc nfc
+/dev/i2c-6                                          0660 nfc nfc
 /dev/pn547                                          0660 nfc nfc
 /sys/devices/f9928000.i2c/i2c-6/6-0028  init_deinit 0200 nfc nfc
 /sys/devices/f9928000.i2c/i2c-6/6-0028  set_pwr     0200 nfc nfc
