@@ -123,6 +123,6 @@
 /sys/devices/virtual/graphics/fb1/video_mode          0664 system graphics
 /sys/devices/virtual/graphics/fb1/vendor_name         0664 system graphics
 /sys/devices/virtual/graphics/fb1/product_description 0664 system graphics
-/sys/devices/virtual/graphics/fb1/hdcp/tp             0644 system graphics
+/sys/devices/virtual/graphics/fb1/hdcp/tp             0664 system graphics
 /sys/devices/sony_camera_0/info                       0666 camera camera
 /sys/devices/sony_camera_1/info                       0666 camera camera
