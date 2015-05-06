@@ -215,6 +215,10 @@ on boot
     chmod 0664 /sys/class/graphics/fb1/video_mode
     chmod 0664 /sys/class/graphics/fb1/hdcp/tp
 
+    # fb2 permissions
+    chown system graphics /sys/class/graphics/fb2/ad
+    chmod 0664 /sys/class/graphics/fb2/ad
+
     #For bridgemgr daemon to inform the USB driver of the correct transport
     chown radio radio /sys/class/android_usb/f_rmnet_smd_sdio/transport
 
