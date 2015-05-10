@@ -140,6 +140,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libloc_api_v02 \
     libloc_adapter \
+    libloc_core \
     libloc_eng \
     libgps.utils \
     gps.msm8974
