@@ -50,10 +50,6 @@ on init
     setprop ro.bt.bdaddr_path "/data/etc/bluetooth_bdaddr"
     chown bluetooth bluetooth ${ro.bt.bdaddr_path}
 
-    #Bluetooth LPM
-    chown bluetooth net_bt_stack /proc/bluetooth/sleep/lpm
-    chown bluetooth net_bt_stack /proc/bluetooth/sleep/btwrite
-
 on fs
     mount_all ./fstab.shinano
     setprop ro.crypto.fuse_sdcard true
@@ -159,16 +155,37 @@ on boot
     write /sys/devices/system/cpu/cpu3/online 1
     write /sys/module/msm_thermal/core_control/enabled 1
 
-    chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
-    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
-    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
-    chown bluetooth bluetooth /proc/bluetooth/sleep/proto
+    # bluetooth device
+    chown bluetooth net_bt_stack /dev/ttyHS0
+    chmod 0600 /dev/ttyHS0
+
+    # bluetooth DUN port-bridge
+    chmod 0660 /dev/smd7
+    chown bluetooth bluetooth /dev/smd7
+
+    # bluetooth modules
     chown system system /sys/module/sco/parameters/disable_esco
-    chown bluetooth bluetooth /sys/module/hci_smd/parameters/hcismd_set
+    chown bluetooth net_bt_stack /sys/module/bluetooth_power/parameters/power
+    chown bluetooth net_bt_stack /sys/module/hci_smd/parameters/hcismd_set
     chmod 0660 /sys/module/bluetooth_power/parameters/power
     chmod 0660 /sys/module/hci_smd/parameters/hcismd_set
+
+    # bluetooth rfkill
+    chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/type
+    chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/state
     chmod 0660 /sys/class/rfkill/rfkill0/state
+
+    # bluetooth LPM
+    chown bluetooth net_bt_stack /proc/bluetooth/sleep/proto
+    chown bluetooth net_bt_stack /proc/bluetooth/sleep/lpm
+    chown bluetooth net_bt_stack /proc/bluetooth/sleep/btwrite
     chmod 0660 /proc/bluetooth/sleep/proto
+    chmod 0660 /proc/bluetooth/sleep/lpm
+    chmod 0660 /proc/bluetooth/sleep/btwrite
+
+    # bluetooth UART dev
+    chown bluetooth net_bt_stack /sys/devices/f995d000.uart/clock
+    chmod 0660 /sys/devices/f995d000.uart/clock
 
     #Create QMUX deamon socket area
     mkdir /dev/socket/qmux_radio 0770 radio radio
@@ -191,10 +208,6 @@ on boot
     # port-bridge
     chmod 0660 /dev/smd0
     chown system system /dev/smd0
-
-    # BT DUN port-bridge
-    chmod 0660 /dev/smd7
-    chown bluetooth bluetooth /dev/smd7
 
     chmod 0444 /sys/devices/platform/msm_hsusb/gadget/usb_state
 
