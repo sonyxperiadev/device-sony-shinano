@@ -14,7 +14,7 @@
 
 on init
     write /sys/class/android_usb/android0/iSerial ${ro.serialno}
-    write /sys/class/android_usb/android0/f_rndis/vendorID 0fce
+    write /sys/class/android_usb/android0/f_rndis/vendorID 0f00
     write /sys/class/android_usb/android0/f_rndis/wceis 1
 
 on boot
