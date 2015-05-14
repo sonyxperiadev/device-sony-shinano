@@ -82,9 +82,9 @@
 
 # BT
 /dev/hidraw*                                0666 system    system
-/dev/rfkill                                 0660 wifi      wifi
-/dev/ttyHS0                                 0660 bluetooth bluetooth
-/sys/devices/platform/msm_serial_hs.0/clock 0660 bluetooth bluetooth
+/dev/rfkill                                 0660 bluetooth net_bt_stack
+/dev/ttyHS0                                 0660 bluetooth net_bt_stack
+/sys/devices/f995d000.uart/clock            0660 bluetooth net_bt_stack
 
 # NFC
 /dev/nfc-nci                                        0660 nfc nfc
