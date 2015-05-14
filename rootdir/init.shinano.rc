@@ -321,7 +321,7 @@ service ta_qmi_service /system/bin/ta_qmi_service
 #QCOM prop
 service qmuxd /system/bin/qmuxd
     class main
-    user radio
+    user root
     group radio audio bluetooth gps diag
 
 #QCOM prop
