@@ -30,6 +30,7 @@
 
 #include <sys/ioctl.h>
 #include <sys/types.h>
+#include <sys/stat.h>
 
 #include <hardware/lights.h>
 
@@ -49,6 +50,7 @@ enum led_ident {
 	LED_GREEN,
 	LED_BLUE,
 	LED_BACKLIGHT,
+	LED_BKLT_MDSS
 };
 
 static struct led_desc {
@@ -62,6 +64,11 @@ static struct led_desc {
 		.max_brightness = 0,
 		.max_brightness_s = "/sys/class/leds/wled:backlight/max_brightness",
 		.brightness = "/sys/class/leds/wled:backlight/brightness",
+	},
+	[LED_BKLT_MDSS] = {
+		.max_brightness = 0,
+		.max_brightness_s = "/sys/class/leds/lcd-backlight/max_brightness",
+		.brightness = "/sys/class/leds/lcd-backlight/brightness",
 	},
 	[LED_RED] = {
 		.max_brightness = 0,
@@ -250,6 +257,17 @@ static int set_light_backlight(struct light_device_t *dev, struct light_state_t 
 	return 0;
 }
 
+static int set_light_mdss(struct light_device_t *dev, struct light_state_t const *state)
+{
+	int brightness = rgb_to_brightness(state);
+
+	pthread_mutex_lock(&g_lock);
+	write_led_scaled(LED_BKLT_MDSS, brightness, NULL, 0);
+	pthread_mutex_unlock(&g_lock);
+
+	return 0;
+}
+
 static const char *pwm_patterns[] = {
 	"0,0,0,0,0,0,0,0,100,0,0,0,0,0,0,0",
 	"0,0,0,0,0,0,0,100,100,0,0,0,0,0,0,0",
@@ -334,6 +352,7 @@ static int open_lights(const struct hw_module_t* module,
 {
 	struct light_state_t light_off = { 0 };
 	struct light *light;
+	struct stat buf;
 	int shared_which;
 	int (*set_light)(struct light_device_t* dev,
 					 struct light_state_t const *state);
@@ -346,7 +365,10 @@ static int open_lights(const struct hw_module_t* module,
 	}
 
 	if (strcmp(name, LIGHT_ID_BACKLIGHT) == 0) {
-		set_light = set_light_backlight;
+		if (stat(led_descs[LED_BACKLIGHT].brightness, &buf) == 0)
+			set_light = set_light_backlight;
+		else
+			set_light = set_light_mdss;
 		shared_which = -1;
 	} else if (strcmp(name, LIGHT_ID_BATTERY) == 0) {
 		set_light = set_light_shared;
@@ -396,7 +418,7 @@ struct hw_module_t HAL_MODULE_INFO_SYM = {
 	.version_major = 1,
 	.version_minor = 0,
 	.id = LIGHTS_HARDWARE_MODULE_ID,
-	.name = "Rhine lights module",
+	.name = "Shinano lights module",
 	.author = "Bjorn Andersson <bjorn.andersson@sonymobile.com>",
 	.methods = &lights_module_methods,
 };
