@@ -12,7 +12,8 @@
 /dev/smd7                 0660   bluetooth  net_bt_stack
 /dev/smd11                0660   radio      radio
 /dev/radio0               0640   system     system
-/dev/rfcomm0              0660   bluetooth  net_bt_stack
+/dev/ccid_bulk            0660   system     system
+/dev/ccid_ctrl            0660   system     system
 /dev/smdcntl0             0640   radio      radio
 /dev/smdcntl1             0640   radio      radio
 /dev/smdcntl2             0640   radio      radio
@@ -80,10 +81,22 @@
 /dev/video33              0660   system     camera
 /sys/devices/virtual/smdpkt/smdcntl* open_timeout 0664 radio  radio
 
+# UIO devices
+/dev/uio0                 0660   system     system
+/dev/uio1                 0660   system     system
+/dev/uio2                 0660   system     system
+/dev/uio3                 0660   system     system
+
 # BT
 /dev/hidraw*                                        0666 system    system
 /dev/rfkill                                         0660 bluetooth net_bt_stack
 /dev/ttyHS0                                         0660 bluetooth net_bt_stack
+
+# Sensors
+/sys/devices/virtual/switch/dock        state       0660 system system
+/sys/devices/virtual/switch/hdmi        state       0660 system system
+/sys/devices/virtual/switch/hdmi_audio  state       0660 system system
+/sys/devices/virtual/switch/wfd         state       0660 system system
 
 # NFC
 /dev/nfc-nci                                        0660 nfc nfc
@@ -118,6 +131,8 @@
 # Clearphase Headphone
 /dev/clearphase_hp        0660  system      audio
 
+/sys/devices/virtual/graphics/fb1/avi_itc             0664 system graphics
+/sys/devices/virtual/graphics/fb1/avi_cn0_1           0664 system graphics
 /sys/devices/virtual/graphics/fb1/hpd                 0664 system graphics
 /sys/devices/virtual/graphics/fb1/video_mode          0664 system graphics
 /sys/devices/virtual/graphics/fb1/vendor_name         0664 system graphics
