@@ -350,11 +350,20 @@ service ta_qmi_service /system/bin/ta_qmi_service
     class main
     user root
 
+on property:ro.boot.baseband=apq
+    setprop ro.radio.noril yes
+    stop ril-daemon
+
+on property:ro.boot.baseband=msm
+    start qmuxd
+    start netmgrd
+
 #QCOM prop
 service qmuxd /system/bin/qmuxd
     class main
     user root
     group radio audio bluetooth gps diag
+    disabled
 
 #QCOM prop
 service rmt_storage /system/bin/rmt_storage
@@ -364,6 +373,7 @@ service rmt_storage /system/bin/rmt_storage
 #QCOM prop
 service netmgrd /system/bin/netmgrd
     class main
+    disabled
 
 #QCOM prop
 service irsc_util /system/bin/irsc_util "/etc/sec_config"
