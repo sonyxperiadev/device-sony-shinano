@@ -200,5 +200,5 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Platform specific default properties
 #
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mtp
-
+    persist.sys.usb.config=mtp \
+    persist.data.qmi.adb_logmask=0
