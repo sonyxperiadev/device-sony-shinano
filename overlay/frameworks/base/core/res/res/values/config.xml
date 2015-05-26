@@ -128,6 +128,12 @@
         <item>"wlan0"</item>
     </string-array>
 
+    <!-- Boolean indicating whether the wifi chipset has dual frequency band support -->
+    <bool translatable="false" name="config_wifi_dual_band_support">true</bool>
+
+    <!-- Boolean indicating whether the wifi chipset has background scan support -->
+    <bool translatable="false" name="config_wifi_background_scan_support">true</bool>
+
     <!-- List of regexpressions describing the interface (if any) that represent tetherable
          bluetooth interfaces.  If the device doesn't want to support tethering over bluetooth this
          should be empty. -->
