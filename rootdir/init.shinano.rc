@@ -157,6 +157,11 @@ on early-boot
     setrlimit 8 67108864 67108864
 
 on boot
+
+    # read ahead buffer
+    write /sys/block/mmcblk0/queue/read_ahead_kb 2048
+    write /sys/block/mmcblk1/queue/read_ahead_kb 2048
+
     # PM8941 flash
     chown media system /sys/class/misc/pm8941-flash/device/current1
     chown media system /sys/class/misc/pm8941-flash/device/current2
