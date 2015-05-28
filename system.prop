@@ -6,6 +6,7 @@ ril.subscription.types=NV,RUIM
 ro.use_data_netmgrd=true
 persist.data.netmgrd.qos.enable=true
 ro.data.large_tcp_window_size=true
+net.qtaguid_enabled=false
 
 # Enable Power save functionality for modem
 persist.radio.add_power_save=1
