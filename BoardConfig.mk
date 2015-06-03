@@ -98,7 +98,9 @@ BOARD_NFC_HAL_SUFFIX := $(TARGET_BOARD_PLATFORM)
 EXTENDED_FONT_FOOTPRINT := true
 
 # Enable dex-preoptimization to speed up first boot sequence
-WITH_DEXPREOPT := true
+ifeq ($(HOST_OS),linux)
+    WITH_DEXPREOPT ?= true
+endif
 
 BUILD_KERNEL := true
 -include vendor/sony/kernel/KernelConfig.mk
