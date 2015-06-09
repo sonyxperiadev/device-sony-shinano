@@ -159,8 +159,8 @@ on early-boot
 on boot
 
     # read ahead buffer
-    write /sys/block/mmcblk0/queue/read_ahead_kb 2048
-    write /sys/block/mmcblk1/queue/read_ahead_kb 2048
+    write /sys/block/mmcblk0/queue/read_ahead_kb 512
+    write /sys/block/mmcblk1/queue/read_ahead_kb 512
 
     # PM8941 flash
     chown media system /sys/class/misc/pm8941-flash/device/current1
