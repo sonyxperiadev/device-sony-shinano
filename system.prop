@@ -62,3 +62,5 @@ persist.sys.wfd.virtual=0
 
 wifi.interface=wlan0
 
+# conceal color
+persist.vidc.dec.conceal_color=32784
