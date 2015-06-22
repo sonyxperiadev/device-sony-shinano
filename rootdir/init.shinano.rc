@@ -344,7 +344,7 @@ on boot
     write /sys/bus/msm_subsys/devices/subsys3/restart_level "related"
 
 #SONY misc
-service tad_static /system/bin/tad_static /dev/block/mmcblk0 1,16
+service tad_static /system/bin/tad_static /dev/block/platform/msm_sdcc.1/by-name/TA 0,16
     user root
     group root
     socket tad stream 0660 system system
