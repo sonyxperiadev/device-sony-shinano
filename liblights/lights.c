@@ -55,7 +55,7 @@ enum led_ident {
 
 static struct led_desc {
 	int max_brightness;
-        const char *max_brightness_s;
+	const char *max_brightness_s;
 	const char *brightness;
 	const char *pwm;
 	const char *step;
