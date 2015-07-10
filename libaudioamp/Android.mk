@@ -18,11 +18,11 @@ include $(BUILD_SHARED_LIBRARY)
 include $(CLEAR_VARS)
 
 LOCAL_SHARED_LIBRARIES := \
-        liblog libutils libcutils
+	liblog libutils libcutils
 
 LOCAL_SRC_FILES := \
-        tfa9890.c \
-        tfa9890_amp.c
+	tfa9890.c \
+	tfa9890_amp.c
 
 LOCAL_MODULE := tfa9890_amp
 

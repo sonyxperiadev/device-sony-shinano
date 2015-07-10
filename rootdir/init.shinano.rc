@@ -67,17 +67,16 @@ on fs
     setprop ro.crypto.fuse_sdcard true
     write /sys/kernel/boot_adsp/boot 1
 
-# msm specific files that need to be created on /data
 on post-fs-data
-    # msm specific files that need to be created on /data
-    # we will remap this as /mnt/sdcard with the sdcard fuse tool
+    # MSM specific files that need to be created on /data
+    # We will remap this as /mnt/sdcard with the sdcard fuse tool
     mkdir /data/media 0775 media_rw media_rw
     chown media_rw media_rw /data/media
 
-    # to observe dnsmasq.leases file for dhcp information of soft ap.
+    # To observe dnsmasq.leases file for dhcp information of soft ap.
     chown dhcp system /data/misc/dhcp
 
-    #Create directory for hostapd
+    # Create directory for hostapd
     mkdir /data/hostapd 0770 system wifi
 
     # Create directory used by audio subsystem
@@ -115,7 +114,7 @@ on post-fs-data
     mkdir /data/misc/location/mq 0770 gps gps
     mkdir /data/misc/location/xtwifi 0770 gps gps
 
-    #Create directory from IMS services
+    # Create directory from IMS services
     mkdir /data/shared 0755
     chown system system /data/shared
 
@@ -136,7 +135,7 @@ on post-fs-data
 
     chown system /dev/block/platform/msm_sdcc.1/by-name
 
-    # permissions for mpdecision and thermald
+    # Permissions for mpdecision and thermald
     mkdir /dev/socket/mpdecision 0770 system system
     chmod 2770 /dev/socket/mpdecision
 
@@ -150,11 +149,11 @@ on charger
     start irsc_util
 
 on early-boot
-    # set RLIMIT_MEMLOCK to 64MB
+    # Set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
 
 on boot
-    # read ahead buffer
+    # Read ahead buffer
     write /sys/block/mmcblk0/queue/read_ahead_kb 512
     write /sys/block/mmcblk1/queue/read_ahead_kb 512
 
@@ -180,22 +179,22 @@ on boot
     chown system system /sys/devices/virtual/input/clearpad/cover_win_right
     chown system system /sys/devices/virtual/input/clearpad/cover_win_top
 
-    # bring CPUs online
+    # Bring CPUs online
     write /sys/module/msm_thermal/core_control/enabled 0
     write /sys/devices/system/cpu/cpu1/online 1
     write /sys/devices/system/cpu/cpu2/online 1
     write /sys/devices/system/cpu/cpu3/online 1
     write /sys/module/msm_thermal/core_control/enabled 1
 
-    # bluetooth device
+    # Bluetooth device
     chown bluetooth net_bt_stack /dev/ttyHS0
     chmod 0600 /dev/ttyHS0
 
-    # bluetooth DUN port-bridge
+    # Bluetooth DUN port-bridge
     chmod 0660 /dev/smd7
     chown bluetooth net_bt_stack /dev/smd7
 
-    # bluetooth modules
+    # Bluetooth modules
     chown system system /sys/module/bluetooth/parameters/disable_ertm
     chown system system /sys/module/bluetooth/parameters/disable_esco
     chown system system /sys/module/bluetooth/parameters/enable_hs
@@ -203,12 +202,12 @@ on boot
     chmod 0644 /sys/module/bluetooth/parameters/disable_esco
     chmod 0644 /sys/module/bluetooth/parameters/enable_hs
 
-    # bluetooth rfkill
+    # Bluetooth rfkill
     chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/type
     chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/state
     chmod 0660 /sys/class/rfkill/rfkill0/state
 
-    # bluetooth LPM
+    # Bluetooth LPM
     chown bluetooth net_bt_stack /proc/bluetooth/sleep/proto
     chown bluetooth net_bt_stack /proc/bluetooth/sleep/lpm
     chown bluetooth net_bt_stack /proc/bluetooth/sleep/btwrite
@@ -216,7 +215,7 @@ on boot
     chmod 0660 /proc/bluetooth/sleep/lpm
     chmod 0660 /proc/bluetooth/sleep/btwrite
 
-    #Create QMUX deamon socket area
+    # Create QMUX deamon socket area
     mkdir /dev/socket/qmux_radio 0770 radio radio
     chmod 2770 /dev/socket/qmux_radio
     mkdir /dev/socket/qmux_audio 0770 media audio
@@ -234,13 +233,13 @@ on boot
     # Allow QMUX daemon to assign port open wait time
     chown radio radio /sys/devices/virtual/hsicctl/hsicctl0/modem_wait
 
-    # port-bridge
+    # Port-bridge
     chmod 0660 /dev/smd0
     chown system system /dev/smd0
 
     chmod 0444 /sys/devices/platform/msm_hsusb/gadget/usb_state
 
-    # create symlink for fb1 as HDMI
+    # Create symlink for fb1 as HDMI
     symlink /dev/graphics/fb1 /dev/graphics/hdmi
 
     # Remove write permissions to video related nodes
@@ -259,11 +258,11 @@ on boot
     chmod 0664 /sys/class/graphics/fb1/video_mode
     chmod 0664 /sys/class/graphics/fb1/hdcp/tp
 
-    # fb2 permissions
+    # FB2 permissions
     chown system graphics /sys/class/graphics/fb2/ad
     chmod 0664 /sys/class/graphics/fb2/ad
 
-    #For bridgemgr daemon to inform the USB driver of the correct transport
+    # For bridgemgr daemon to inform the USB driver of the correct transport
     chown radio radio /sys/class/android_usb/f_rmnet_smd_sdio/transport
 
     chmod 660 /dev/rtc0
@@ -278,16 +277,16 @@ on boot
     # Enable DEBUG_SUSPEND, DEBUG_EXIT_SUSPEND, and DEBUG_WAKEUP
     write /sys/module/wakelock/parameters/debug_mask 7
 
-    #   Define TCP buffer sizes for various networks
-    #   ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
+    # Define TCP buffer sizes for various networks
+    # ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
     setprop net.tcp.buffersize.wifi    524288,2097152,4194304,262144,524288,1048576
 
-    #   Assign TCP buffer thresholds to be ceiling value of technology maximums
-    #   Increased technology maximums should be reflected here.
+    # Assign TCP buffer thresholds to be ceiling value of technology maximums
+    # Increased technology maximums should be reflected here.
     write /proc/sys/net/core/rmem_max  2097152
     write /proc/sys/net/core/wmem_max  2097152
 
-    #To allow interfaces to get v6 address when tethering is enabled
+    # To allow interfaces to get v6 address when tethering is enabled
     write /proc/sys/net/ipv6/conf/rmnet0/accept_ra 2
     write /proc/sys/net/ipv6/conf/rmnet1/accept_ra 2
     write /proc/sys/net/ipv6/conf/rmnet2/accept_ra 2
@@ -318,7 +317,7 @@ on boot
     write /proc/sys/net/netfilter/nf_conntrack_tcp_be_liberal 1
 
     # NFC
-    # local data and nfcee xml storage
+    # Local data and nfcee xml storage
     mkdir /data/nfc 0770 nfc nfc
     mkdir /data/nfc/param 0770 nfc nfc
 
@@ -333,21 +332,21 @@ on boot
     setrlimit 4 -1 -1
     write /proc/sys/kernel/dmesg_restrict 0
 
-    # enable subsystem restart
+    # Enable subsystem restart
     write /sys/module/subsystem_restart/parameters/enable_ramdumps 0
     write /sys/bus/msm_subsys/devices/subsys0/restart_level "related"
     write /sys/bus/msm_subsys/devices/subsys1/restart_level "related"
     write /sys/bus/msm_subsys/devices/subsys2/restart_level "related"
     write /sys/bus/msm_subsys/devices/subsys3/restart_level "related"
 
-#SONY misc
+# SONY misc
 service tad_static /system/vendor/bin/tad_static /dev/block/platform/msm_sdcc.1/by-name/TA 0,16
     user root
     group root
     socket tad stream 0660 system system
     class core
 
-#SONY misc
+# SONY misc
 service ta_qmi_service /system/vendor/bin/ta_qmi_service
     class main
     user root
@@ -360,64 +359,64 @@ on property:ro.boot.baseband=msm
     start qmuxd
     start netmgrd
 
-#QCOM prop
+# QCOM prop
 service qmuxd /system/vendor/bin/qmuxd
     class main
     user root
     group radio audio bluetooth gps diag
     disabled
 
-#QCOM prop
+# QCOM prop
 service rmt_storage /system/vendor/bin/rmt_storage
     class core
     user root
 
-#QCOM prop
+# QCOM prop
 service netmgrd /system/vendor/bin/netmgrd
     class main
     disabled
 
-#QCOM prop
+# QCOM prop
 service irsc_util /system/vendor/bin/irsc_util "/etc/sec_config"
     class main
     user root
     oneshot
 
-#QCOM prop
+# QCOM prop
 service sct_service /system/vendor/bin/sct_service
     user root
     class main
 
-#QCOM prop
+# QCOM prop
 service mlog_qmi_service /system/vendor/bin/mlog_qmi_service
     user root
     class main
 
-#Camera
+# Camera
 service qcamerasvr /system/vendor/bin/mm-qcamera-daemon
     class late_start
     user camera
     group camera system inet input graphics
 
-#QCOM sensors
+# QCOM sensors
 service sensors /system/vendor/bin/sensors.qcom
     class main
     user root
     group root
 
-#OSS thermal management
+# OSS thermal management
 service thermanager /system/bin/thermanager /system/etc/thermanager.xml
     class main
     user root
     group root
 
-#OSS WLAN setup
+# OSS WLAN setup
 service macaddrsetup /system/bin/macaddrsetup /sys/devices/platform/bcmdhd_wlan/macaddr
     class main
     user root
     oneshot
 
-#TFA AMP
+# TFA AMP
 service tfa9890_amp /system/bin/tfa9890_amp
     class late_start
     user root
@@ -428,7 +427,7 @@ service wpa_supplicant /system/bin/wpa_supplicant \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
     -I/system/etc/wifi/wpa_supplicant_overlay.conf \
     -e/data/misc/wifi/entropy.bin -g@android:wpa_wlan0
-    # we will start as root and wpa_supplicant will switch to user wifi
+    # We will start as root and wpa_supplicant will switch to user wifi
     # after setting up the capabilities required for WEXT
     # user wifi
     # group wifi inet keystore
@@ -443,7 +442,7 @@ service p2p_supplicant /system/bin/wpa_supplicant \
     -puse_p2p_group_interface=1p2p_device=1 \
     -m/data/misc/wifi/p2p_supplicant.conf \
     -e/data/misc/wifi/entropy.bin -g@android:wpa_wlan0
-    # we will start as root and wpa_supplicant will switch to user wifi
+    # We will start as root and wpa_supplicant will switch to user wifi
     # after setting up the capabilities required for WEXT
     # user wifi
     # group wifi inet keystore

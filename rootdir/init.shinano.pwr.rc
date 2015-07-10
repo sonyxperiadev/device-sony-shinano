@@ -32,7 +32,7 @@ on charger
     write /sys/devices/system/cpu/cpu3/online 0
 
 on boot
-    # Rhine boots with performance governor.
+    # Device boots with performance governor.
     # Switch one core to interactive to set permissions, for power hal and system server.
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
     chown system system /dev/cpuctl/cpu.notify_on_migrate
