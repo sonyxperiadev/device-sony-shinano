@@ -29,6 +29,7 @@ PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/system/usr/idc/clearpad.idc:system/usr/idc/clearpad.idc \
     $(SONY_ROOT)/system/etc/bluetooth/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf \
     $(SONY_ROOT)/system/etc/sec_config:system/etc/sec_config \
+    $(SONY_ROOT)/system/etc/sensors_settings:system/etc/sensors_settings \
     $(SONY_ROOT)/system/etc/gps.conf:system/etc/gps.conf
 
 PRODUCT_COPY_FILES += \
