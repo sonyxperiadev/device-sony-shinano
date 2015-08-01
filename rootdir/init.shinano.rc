@@ -125,7 +125,7 @@ on post-fs-data
 
     mkdir /data/data/media 0770 media media
 
-    mkdir /data/camera 0771 root camera
+    mkdir /data/misc/camera 0771 root camera
 
     chown camera camera /sys/devices/sony_camera_0/info
     chmod 0666 /sys/devices/sony_camera_0/info
