@@ -2,6 +2,9 @@ rild.libpath=/vendor/lib/libril-qc-qmi-1.so
 rild.libargs=-d /dev/smd0
 ril.subscription.types=NV,RUIM
 
+# Default to LTE/GSM/WCDMA. B2G will rely on it to detect hw capabilities
+ro.telephony.default_network=9
+
 # system props for the data modules
 ro.use_data_netmgrd=true
 persist.data.netmgrd.qos.enable=true
