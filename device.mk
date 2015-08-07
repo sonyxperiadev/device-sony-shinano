@@ -196,6 +196,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     e2fsck
 
+# BoringSSL hacks
+PRODUCT_PACKAGES += \
+    libboringssl-fixer-upper
+
 # APN list
 PRODUCT_COPY_FILES += device/sample/etc/apns-full-conf.xml:system/etc/apns-conf.xml
 
