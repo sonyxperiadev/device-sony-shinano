@@ -418,7 +418,7 @@ service thermanager /system/bin/thermanager /system/etc/thermanager.xml
     group root
 
 #OSS WLAN setup
-service addrsetup /system/bin/addrsetup /sys/devices/platform/bcmdhd_wlan/macaddr
+service macaddrsetup /system/bin/macaddrsetup /sys/devices/platform/bcmdhd_wlan/macaddr
     class main
     user root
     oneshot
