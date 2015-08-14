@@ -160,7 +160,6 @@ on early-boot
     setrlimit 8 67108864 67108864
 
 on boot
-
     # read ahead buffer
     write /sys/block/mmcblk0/queue/read_ahead_kb 512
     write /sys/block/mmcblk1/queue/read_ahead_kb 512
@@ -347,14 +346,14 @@ on boot
     write /sys/bus/msm_subsys/devices/subsys3/restart_level "related"
 
 #SONY misc
-service tad_static /system/bin/tad_static /dev/block/platform/msm_sdcc.1/by-name/TA 0,16
+service tad_static /system/vendor/bin/tad_static /dev/block/platform/msm_sdcc.1/by-name/TA 0,16
     user root
     group root
     socket tad stream 0660 system system
     class core
 
 #SONY misc
-service ta_qmi_service /system/bin/ta_qmi_service
+service ta_qmi_service /system/vendor/bin/ta_qmi_service
     class main
     user root
 
@@ -367,46 +366,46 @@ on property:ro.boot.baseband=msm
     start netmgrd
 
 #QCOM prop
-service qmuxd /system/bin/qmuxd
+service qmuxd /system/vendor/bin/qmuxd
     class main
     user root
     group radio audio bluetooth gps diag
     disabled
 
 #QCOM prop
-service rmt_storage /system/bin/rmt_storage
+service rmt_storage /system/vendor/bin/rmt_storage
     class core
     user root
 
 #QCOM prop
-service netmgrd /system/bin/netmgrd
+service netmgrd /system/vendor/bin/netmgrd
     class main
     disabled
 
 #QCOM prop
-service irsc_util /system/bin/irsc_util "/etc/sec_config"
+service irsc_util /system/vendor/bin/irsc_util "/etc/sec_config"
     class main
     user root
     oneshot
 
 #QCOM prop
-service sct_service /system/bin/sct_service
+service sct_service /system/vendor/bin/sct_service
     user root
     class main
 
 #QCOM prop
-service mlog_qmi_service /system/bin/mlog_qmi_service
+service mlog_qmi_service /system/vendor/bin/mlog_qmi_service
     user root
     class main
 
 #Camera
-service qcamerasvr /system/bin/mm-qcamera-daemon
+service qcamerasvr /system/vendor/bin/mm-qcamera-daemon
     class late_start
     user camera
     group camera system inet input graphics
 
 #QCOM sensors
-service sensors /system/bin/sensors.qcom
+service sensors /system/vendor/bin/sensors.qcom
     class main
     user root
     group root
