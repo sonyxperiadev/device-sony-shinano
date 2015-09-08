@@ -107,6 +107,7 @@
 /dev/nfc-nci                                        0660 nfc nfc
 /dev/pn544                                          0660 nfc nfc
 /dev/pn547                                          0660 nfc nfc
+/dev/pn54x                                          0660 nfc nfc
 /sys/devices/f9928000.i2c/i2c-6/6-0028  init_deinit 0200 nfc nfc
 /sys/devices/f9928000.i2c/i2c-6/6-0028  set_pwr     0200 nfc nfc
 /sys/devices/f9928000.i2c/i2c-6/6-0028  res_ready   0400 nfc nfc

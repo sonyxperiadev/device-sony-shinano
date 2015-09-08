@@ -329,7 +329,8 @@ on boot
     mkdir /data/nfc/param 0770 nfc nfc
 
     # Symlink for compability
-    symlink /dev/pn547 /dev/pn544
+    symlink /dev/pn54x /dev/pn544
+    symlink /dev/pn54x /dev/pn547
 
     # Set the console loglevel to < KERN_INFO
     # Set the default message loglevel to KERN_INFO
