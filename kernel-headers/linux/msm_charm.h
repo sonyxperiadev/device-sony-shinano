@@ -1,5 +1,5 @@
-#ifndef _ARCH_ARM_MACH_MSM_MDM_IOCTLS_H
-#define _ARXH_ARM_MACH_MSM_MDM_IOCTLS_H
+#ifndef _UAPI_MSM_CHARM_H_
+#define _UAPI_MSM_CHARM_H_
 
 
 #define CHARM_CODE		0xCC

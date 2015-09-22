@@ -1,6 +1,8 @@
 #ifndef __LINUX_MSM_CAMSENSOR_SDK_H
 #define __LINUX_MSM_CAMSENSOR_SDK_H
 
+#include <linux/v4l2-mediabus.h>
+
 #define KVERSION 0x1
 
 #define MAX_POWER_CONFIG      12
@@ -18,6 +20,7 @@
 #define CSI_DECODE_DPCM_10_8_10 5
 #define MAX_CID                 16
 #define I2C_SEQ_REG_DATA_MAX    256
+#define MSM_V4L2_PIX_FMT_META v4l2_fourcc('M', 'E', 'T', 'A') /* META */
 
 #define MAX_ACTUATOR_REG_TBL_SIZE 8
 #define MAX_ACTUATOR_REGION       5
@@ -25,7 +28,7 @@
 #define MAX_ACTUATOR_SCENARIO     8
 #define MAX_ACT_MOD_NAME_SIZE     32
 #define MAX_ACT_NAME_SIZE         32
-#define MAX_ACTUATOR_INIT_SET     120
+#define MAX_ACTUATOR_INIT_SET     12
 #define MAX_I2C_REG_SET           12
 
 #define MAX_NAME_SIZE             32
@@ -43,7 +46,6 @@ enum i2c_freq_mode_t {
 	I2C_STANDARD_MODE,
 	I2C_FAST_MODE,
 	I2C_CUSTOM_MODE,
-	I2C_FAST_PLUS_MODE,
 	I2C_MAX_MODES,
 };
 
@@ -83,12 +85,6 @@ enum msm_camera_i2c_data_type {
 enum msm_sensor_power_seq_gpio_t {
 	SENSOR_GPIO_RESET,
 	SENSOR_GPIO_STANDBY,
-#ifdef CONFIG_SONY_CAMERA
-	SENSOR_GPIO_CAM_VAA_V2P8,
-	SENSOR_GPIO_CAM_VDDAF_V2P8,
-	SENSOR_GPIO_CAM_VDDIO_V1P8,
-	SENSOR_GPIO_RESET1,
-#endif
 	SENSOR_GPIO_AF_PWDM,
 	SENSOR_GPIO_VIO,
 	SENSOR_GPIO_VANA,
@@ -142,10 +138,6 @@ enum msm_actuator_addr_type {
 enum msm_actuator_write_type {
 	MSM_ACTUATOR_WRITE_HW_DAMP,
 	MSM_ACTUATOR_WRITE_DAC,
-	MSM_ACTUATOR_WRITE,
-	MSM_ACTUATOR_WRITE_DIR_REG,
-	MSM_ACTUATOR_POLL,
-	MSM_ACTUATOR_READ_WRITE,
 };
 
 enum msm_actuator_i2c_operation {
@@ -157,7 +149,6 @@ enum actuator_type {
 	ACTUATOR_VCM,
 	ACTUATOR_PIEZO,
 	ACTUATOR_HVCM,
-	ACTUATOR_BIVCM,
 };
 
 enum msm_flash_driver_type {
@@ -177,19 +168,19 @@ enum msm_flash_cfg_type_t {
 
 struct msm_sensor_power_setting {
 	enum msm_sensor_power_seq_type_t seq_type;
-	unsigned short seq_val;
+	uint16_t seq_val;
 	long config_val;
-	unsigned short delay;
+	uint16_t delay;
 	void *data[10];
 };
 
 struct msm_sensor_power_setting_array {
 	struct msm_sensor_power_setting  power_setting_a[MAX_POWER_CONFIG];
 	struct msm_sensor_power_setting *power_setting;
-	unsigned short size;
+	uint16_t size;
 	struct msm_sensor_power_setting  power_down_setting_a[MAX_POWER_CONFIG];
 	struct msm_sensor_power_setting *power_down_setting;
-	unsigned short size_down;
+	uint16_t size_down;
 };
 
 struct msm_sensor_init_params {
@@ -198,13 +189,12 @@ struct msm_sensor_init_params {
 	/* sensor position: front, back */
 	enum camb_position_t position;
 	/* sensor mount angle */
-	unsigned int            sensor_mount_angle;
+	uint32_t            sensor_mount_angle;
 };
 
 struct msm_sensor_id_info_t {
-	unsigned short sensor_id_reg_addr;
-	unsigned short sensor_id;
-	unsigned short sensor_id_mask;
+	uint16_t sensor_id_reg_addr;
+	uint16_t sensor_id;
 };
 
 struct msm_camera_sensor_slave_info {
@@ -214,115 +204,108 @@ struct msm_camera_sensor_slave_info {
 	char ois_name[32];
 	char flash_name[32];
 	enum msm_sensor_camera_id_t camera_id;
-	unsigned short slave_addr;
+	uint16_t slave_addr;
 	enum i2c_freq_mode_t i2c_freq_mode;
 	enum msm_camera_i2c_reg_addr_type addr_type;
 	struct msm_sensor_id_info_t sensor_id_info;
 	struct msm_sensor_power_setting_array power_setting_array;
-	unsigned char  is_init_params_valid;
+	uint8_t  is_init_params_valid;
 	struct msm_sensor_init_params sensor_init_params;
-	unsigned char is_flash_supported;
+	uint8_t is_flash_supported;
 };
 
 struct msm_camera_i2c_reg_array {
-	unsigned short reg_addr;
-	unsigned short reg_data;
-	unsigned int delay;
+	uint16_t reg_addr;
+	uint16_t reg_data;
+	uint32_t delay;
 };
 
 struct msm_camera_i2c_reg_setting {
 	struct msm_camera_i2c_reg_array *reg_setting;
-	unsigned short size;
+	uint16_t size;
 	enum msm_camera_i2c_reg_addr_type addr_type;
 	enum msm_camera_i2c_data_type data_type;
-	unsigned short delay;
+	uint16_t delay;
 };
 
 struct msm_camera_csid_vc_cfg {
-	unsigned char cid;
-	unsigned char dt;
-	unsigned char decode_format;
+	uint8_t cid;
+	uint8_t dt;
+	uint8_t decode_format;
 };
 
 struct msm_camera_csid_lut_params {
-	unsigned char num_cid;
+	uint8_t num_cid;
 	struct msm_camera_csid_vc_cfg vc_cfg_a[MAX_CID];
 	struct msm_camera_csid_vc_cfg *vc_cfg[MAX_CID];
 };
 
 struct msm_camera_csid_params {
-	unsigned char lane_cnt;
-	unsigned short lane_assign;
-	unsigned char phy_sel;
-	unsigned int csi_clk;
+	uint8_t lane_cnt;
+	uint16_t lane_assign;
+	uint8_t phy_sel;
+	uint32_t csi_clk;
 	struct msm_camera_csid_lut_params lut_params;
 };
 
 struct msm_camera_csiphy_params {
-	unsigned char lane_cnt;
-	unsigned char settle_cnt;
-	unsigned short lane_mask;
-	unsigned char combo_mode;
-	unsigned char csid_core;
-	unsigned int csiphy_clk;
+	uint8_t lane_cnt;
+	uint8_t settle_cnt;
+	uint16_t lane_mask;
+	uint8_t combo_mode;
+	uint8_t csid_core;
+	uint32_t csiphy_clk;
 };
 
 struct msm_camera_i2c_seq_reg_array {
-	unsigned short reg_addr;
-	unsigned char reg_data[I2C_SEQ_REG_DATA_MAX];
-	unsigned short reg_data_size;
+	uint16_t reg_addr;
+	uint8_t reg_data[I2C_SEQ_REG_DATA_MAX];
+	uint16_t reg_data_size;
 };
 
 struct msm_camera_i2c_seq_reg_setting {
 	struct msm_camera_i2c_seq_reg_array *reg_setting;
-	unsigned short size;
+	uint16_t size;
 	enum msm_camera_i2c_reg_addr_type addr_type;
-	unsigned short delay;
+	uint16_t delay;
 };
 
 struct msm_actuator_reg_params_t {
 	enum msm_actuator_write_type reg_write_type;
-	unsigned int hw_mask;
-	unsigned short reg_addr;
-	unsigned short hw_shift;
-	unsigned short data_shift;
-	unsigned short data_type;
-	unsigned short addr_type;
-	unsigned short reg_data;
-	unsigned short delay;
+	uint32_t hw_mask;
+	uint16_t reg_addr;
+	uint16_t hw_shift;
+	uint16_t data_shift;
 };
 
-
 struct damping_params_t {
-	unsigned int damping_step;
-	unsigned int damping_delay;
-	unsigned int hw_params;
+	uint32_t damping_step;
+	uint32_t damping_delay;
+	uint32_t hw_params;
 };
 
 struct region_params_t {
 	/* [0] = ForwardDirection Macro boundary
 	   [1] = ReverseDirection Inf boundary
 	*/
-	unsigned short step_bound[2];
-	unsigned short code_per_step;
-	/* qvalue for converting float type numbers to integer format */
-	unsigned int qvalue;
+	uint16_t step_bound[2];
+	uint16_t code_per_step;
 };
 
 struct reg_settings_t {
-	unsigned short reg_addr;
+	uint16_t reg_addr;
 	enum msm_actuator_addr_type addr_type;
-	unsigned short reg_data;
+	uint16_t reg_data;
 	enum msm_actuator_data_type data_type;
 	enum msm_actuator_i2c_operation i2c_operation;
-	unsigned int delay;
+	uint32_t delay;
 };
 
 struct msm_camera_i2c_reg_setting_array {
 	struct msm_camera_i2c_reg_array reg_setting_a[MAX_I2C_REG_SET];
-	unsigned short size;
+	uint16_t size;
 	enum msm_camera_i2c_reg_addr_type addr_type;
 	enum msm_camera_i2c_data_type data_type;
-	unsigned short delay;
+	uint16_t delay;
 };
 #endif /* __LINUX_MSM_CAM_SENSOR_H */
