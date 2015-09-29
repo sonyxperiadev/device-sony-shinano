@@ -1,4 +1,5 @@
 /*
+ * Copyright (C) 2015 The CyanogenMod Project
  * Copyright (C) 2016 Adam Farden
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,8 +17,6 @@
 
 #include <errno.h>
 #include <string.h>
-#include <sys/types.h>
-#include <sys/stat.h>
 #include <fcntl.h>
 
 #define LOG_TAG "Simple PowerHAL"
@@ -25,6 +24,26 @@
 
 #include <hardware/hardware.h>
 #include <hardware/power.h>
+
+#define CPUFREQ_PATH "/sys/devices/system/cpu/cpu0/cpufreq/"
+#define INTERACTIVE_PATH "/sys/devices/system/cpu/cpufreq/interactive/"
+
+#define SCALING_MAX_FREQ "1190400"
+#define SCALING_MAX_FREQ_LPM "787200"
+
+#define HISPEED_FREQ "998400"
+#define HISPEED_FREQ_LPM "787200"
+
+#define GO_HISPEED_LOAD "50"
+#define GO_HISPEED_LOAD_LPM "90"
+
+#define TARGET_LOADS "80 998400:90 1190400:99"
+#define TARGET_LOADS_LPM "95 1190400:99"
+
+static pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
+static int boostpulse_fd = -1;
+static int requested_power_profile = -1;
+static int is_low_power_mode = 0;
 
 int sysfs_write(char *path, char *s)
 {
@@ -60,70 +79,129 @@ static void power_init(__attribute__((unused)) struct power_module *module)
 enum {
     PROFILE_POWER_SAVE = 0,
     PROFILE_BALANCED,
-    PROFILE_HIGH_PERFORMANCE
+    PROFILE_HIGH_PERFORMANCE,
+    PROFILE_MAX
 };
 
-static int current_power_profile = PROFILE_BALANCED;
+static int current_power_profile = -1;
+
+static int boostpulse_open()
+{
+    pthread_mutex_lock(&lock);
+    if (boostpulse_fd < 0) {
+        boostpulse_fd = open(INTERACTIVE_PATH "boostpulse", O_WRONLY);
+    }
+    pthread_mutex_unlock(&lock);
+
+    return boostpulse_fd;
+}
 
 static void set_power_profile(int profile) {
+
+    if (is_low_power_mode) {
+        /* Let's assume we get a valid profile */
+        requested_power_profile = profile;
+        ALOGD("%s: low power mode enabled, ignoring profile change request", __func__);
+        return;
+    }
 
     if (profile == current_power_profile)
         return;
 
     switch (profile) {
         case PROFILE_POWER_SAVE:
-            sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay", "40000 1100000:80000 1700000:40000");
-            sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load", "90");
-            sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/hispeed_freq", "960000");
-            sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/min_sample_time", "20000");
-            sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/target_loads", "85 1200000:90 1800000:70");
-            sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/timer_rate", "30000");
-            sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/timer_slack", "20000");
+            sysfs_write(INTERACTIVE_PATH "boost", "0");
+            sysfs_write(INTERACTIVE_PATH "boostpulse_duration", "0");
+            sysfs_write(INTERACTIVE_PATH "go_hispeed_load", GO_HISPEED_LOAD_LPM);
+            sysfs_write(INTERACTIVE_PATH "hispeed_freq", HISPEED_FREQ_LPM);
+            sysfs_write(INTERACTIVE_PATH "io_is_busy", "0");
+            sysfs_write(INTERACTIVE_PATH "min_sample_time", "60000");
+            sysfs_write(INTERACTIVE_PATH "target_loads", TARGET_LOADS_LPM);
+            sysfs_write(CPUFREQ_PATH "scaling_max_freq", SCALING_MAX_FREQ_LPM);
+            ALOGD("%s: set powersave", __func__);
             break;
 
         case PROFILE_BALANCED:
-        case PROFILE_HIGH_PERFORMANCE:
-            sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay", "20000 1400000:40000 1700000:20000");
-            sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load", "90");
-            sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/hispeed_freq", "1190400");
-            sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/min_sample_time", "40000");
-            sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/target_loads", "85 1500000:90 1800000:70");
-            sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/timer_rate", "30000");
-            sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/timer_slack", "20000");
+            sysfs_write(INTERACTIVE_PATH "boost", "0");
+            sysfs_write(INTERACTIVE_PATH "boostpulse_duration", "60000");
+            sysfs_write(INTERACTIVE_PATH "go_hispeed_load", GO_HISPEED_LOAD);
+            sysfs_write(INTERACTIVE_PATH "hispeed_freq", HISPEED_FREQ);
+            sysfs_write(INTERACTIVE_PATH "io_is_busy", "1");
+            sysfs_write(INTERACTIVE_PATH "min_sample_time", "60000");
+            sysfs_write(INTERACTIVE_PATH "target_loads", TARGET_LOADS);
+            sysfs_write(CPUFREQ_PATH "scaling_max_freq", SCALING_MAX_FREQ);
+            ALOGD("%s: set balanced mode", __func__);
+
             break;
+        case PROFILE_HIGH_PERFORMANCE:
+            sysfs_write(INTERACTIVE_PATH "boost", "1");
+            sysfs_write(INTERACTIVE_PATH "boostpulse_duration", "60000");
+            sysfs_write(INTERACTIVE_PATH "go_hispeed_load", GO_HISPEED_LOAD);
+            sysfs_write(INTERACTIVE_PATH "hispeed_freq", HISPEED_FREQ);
+            sysfs_write(INTERACTIVE_PATH "io_is_busy", "1");
+            sysfs_write(INTERACTIVE_PATH "min_sample_time", "60000");
+            sysfs_write(INTERACTIVE_PATH "target_loads", "80");
+            sysfs_write(CPUFREQ_PATH "scaling_max_freq", SCALING_MAX_FREQ);
+            ALOGD("%s: set performance mode", __func__);
+            break;
+
+    default:
+        ALOGE("%s: unknown profile: %d", __func__, profile);
+        return;
     }
 
     current_power_profile = profile;
 }
 
-static int low_power_mode = 0;
+static void set_low_power_mode(int on)
+{
+    if (on == is_low_power_mode)
+        return;
+
+    ALOGD("%s: state=%d", __func__, on);
+
+    if (on) {
+        requested_power_profile = current_power_profile;
+        set_power_profile(PROFILE_POWER_SAVE);
+        is_low_power_mode = 1;
+    } else {
+        is_low_power_mode = 0;
+        set_power_profile(requested_power_profile);
+    }
+}
 
 static void power_hint(__attribute__((unused)) struct power_module *module,
-                       power_hint_t hint, void *data)
+                       __attribute__((unused)) power_hint_t hint,
+                       __attribute__((unused)) void *data)
 {
+    char buf[80];
+    int len;
+
     switch (hint) {
-        case POWER_HINT_VSYNC:
-            break;
 
         case POWER_HINT_INTERACTION:
-            // When touching the screen, pressing buttons etc.
-            if (data) {
-                ALOGI("Interacting with device, boost speeds for 80000uS");
-                sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/boostpulse", "1");
+            if (current_power_profile != PROFILE_BALANCED)
+                return;
+
+            if (boostpulse_open() >= 0) {
+                snprintf(buf, sizeof(buf), "%d", 1);
+                len = write(boostpulse_fd, &buf, sizeof(buf));
+                if (len < 0) {
+                    strerror_r(errno, buf, sizeof(buf));
+                    ALOGE("Error writing to boostpulse: %s\n", buf);
+
+                    pthread_mutex_lock(&lock);
+                    close(boostpulse_fd);
+                    boostpulse_fd = -1;
+                    pthread_mutex_unlock(&lock);
+                }
             }
             break;
 
         case POWER_HINT_LOW_POWER:
-            // When we want to save battery.
-            if (data) {
-                ALOGI("Low power mode enabled.");
-                low_power_mode = 1;
-                set_power_profile(PROFILE_POWER_SAVE);
-            } else {
-                ALOGI("Low power mode disabled.");
-                low_power_mode = 0;
-                set_power_profile(PROFILE_BALANCED);
-            }
+            pthread_mutex_lock(&lock);
+            set_low_power_mode(*(int32_t *)data ? 1 : 0);
+            pthread_mutex_unlock(&lock);
             break;
 
         default:
@@ -134,17 +212,17 @@ static void power_hint(__attribute__((unused)) struct power_module *module,
 static void set_interactive(__attribute__((unused)) struct power_module *module,
                             int on)
 {
-    // set interactive means change governor, cpufreqs etc
-    // for when device is awake and ready to be used.
+    if (current_power_profile != PROFILE_BALANCED)
+        return;
 
-    if (!on) {
-        ALOGI("Device is asleep.");
-        set_power_profile(PROFILE_POWER_SAVE);
+    if (on) {
+        sysfs_write(INTERACTIVE_PATH "hispeed_freq", HISPEED_FREQ);
+        sysfs_write(INTERACTIVE_PATH "go_hispeed_load", GO_HISPEED_LOAD);
+        sysfs_write(INTERACTIVE_PATH "target_loads", TARGET_LOADS);
     } else {
-        ALOGI("Device is awake.");
-        if (!low_power_mode) {
-            set_power_profile(PROFILE_BALANCED);
-        }
+        sysfs_write(INTERACTIVE_PATH "hispeed_freq", HISPEED_FREQ_LPM);
+        sysfs_write(INTERACTIVE_PATH "go_hispeed_load", GO_HISPEED_LOAD_LPM);
+        sysfs_write(INTERACTIVE_PATH "target_loads", TARGET_LOADS_LPM);
     }
 }
 
