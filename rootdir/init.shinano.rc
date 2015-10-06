@@ -67,7 +67,6 @@ on init
 
 on fs
     mount_all ./fstab.shinano
-    setprop ro.crypto.fuse_sdcard true
     write /sys/kernel/boot_adsp/boot 1
 
 on post-fs-data
@@ -481,14 +480,6 @@ service dhcpcd_bt-pan /system/bin/dhcpcd -BKLG
 service iprenew_bt-pan /system/bin/dhcpcd -n
     disabled
     oneshot
-
-service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 -w 1023 -t 4 -d /mnt/media_rw/sdcard1 /storage/sdcard1
-    class late_start
-    disabled
-
-service fuse_usbdisk /system/bin/sdcard -u 1023 -g 1023 -w 1023 -t 4 -d /mnt/media_rw/usbdisk /storage/usbdisk
-    class late_start
-    disabled
 
 on property:bluetooth.isEnabled=true
     write /sys/class/bluetooth/hci0/idle_timeout 7000
