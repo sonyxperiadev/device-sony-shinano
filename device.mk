@@ -120,9 +120,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libion
 
-PRODUCT_PACKAGES += \
-    libstlport
-
 # OMX
 PRODUCT_PACKAGES += \
     libc2dcolorconvert \
@@ -147,7 +144,6 @@ PRODUCT_PACKAGES += \
 # GPS
 PRODUCT_PACKAGES += \
     libloc_api_v02 \
-    libloc_adapter \
     libloc_core \
     libloc_eng \
     libgps.utils \
@@ -156,7 +152,6 @@ PRODUCT_PACKAGES += \
 # WLAN
 PRODUCT_PACKAGES += \
     p2p_supplicant.conf \
-    gsm_domains.conf \
     dhcpcd.conf \
     hostapd \
     libwpa_client \
