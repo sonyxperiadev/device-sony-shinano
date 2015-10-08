@@ -19,39 +19,6 @@ on early-init
     mount debugfs debugfs /sys/kernel/debug
 
 on init
-    mkdir /tmp
-    mount tmpfs tmpfs /tmp nosuid mode=0755,uid=0,gid=0
-    symlink /dev/socket /tmp
-
-    # See storage config details at http://source.android.com/tech/storage/
-    mkdir /mnt/shell/emulated 0700 shell shell
-    mkdir /storage/emulated 0555 root root
-
-    mkdir /mnt/media_rw/sdcard1 0775 media_rw media_rw
-    mkdir /mnt/media_rw/usbdisk 0775 media_rw media_rw
-    mkdir /mnt/media_rw/uicc0 0775 media_rw media_rw
-    mkdir /mnt/media_rw/uicc1 0775 media_rw media_rw
-    mkdir /mnt/media_rw/usbotg 0775 media_rw media_rw
-
-    mkdir /storage/sdcard1 0775 system system
-    mkdir /storage/usbdisk 0775 system system
-    mkdir /storage/uicc0 0775 system system
-    mkdir /storage/uicc1 0775 system system
-    mkdir /storage/usbotg 0775 system system
-
-    export EXTERNAL_STORAGE /storage/emulated/legacy
-    export SECONDARY_STORAGE /storage/sdcard1
-    export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
-    export EMULATED_STORAGE_TARGET /storage/emulated
-
-    # Support legacy paths
-    symlink /storage/emulated/legacy /sdcard
-    symlink /storage/emulated/legacy /mnt/sdcard
-    symlink /storage/emulated/legacy /storage/sdcard0
-    symlink /mnt/shell/emulated/0 /storage/emulated/legacy
-    symlink /storage/usbdisk /usbdisk
-    symlink /storage/usbdisk /mnt/usbdisk
-
     # Support legacy libs
     symlink /system/vendor/lib/egl /egl
 
@@ -64,6 +31,10 @@ on init
     # Bluetooth address setting
     setprop ro.bt.bdaddr_path "/data/etc/bluetooth_bdaddr"
     chown bluetooth bluetooth ${ro.bt.bdaddr_path}
+
+    # Support legacy paths
+    symlink /sdcard /mnt/sdcard
+    symlink /sdcard /storage/sdcard0
 
 on fs
     mount_all ./fstab.shinano
