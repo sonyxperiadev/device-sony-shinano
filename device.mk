@@ -195,19 +195,11 @@ PRODUCT_PACKAGES += \
     charger_res_images
 
 PRODUCT_PACKAGES += \
-    librs_jni \
-    com.android.future.usb.accessory
-
-PRODUCT_PACKAGES += \
     InCallUI \
     Launcher3
 
 PRODUCT_PACKAGES += \
     libemoji
-
-# Filesystem management tools
-PRODUCT_PACKAGES += \
-    e2fsck
 
 # APN list
 PRODUCT_COPY_FILES += \
