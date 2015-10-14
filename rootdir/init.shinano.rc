@@ -41,11 +41,6 @@ on fs
     write /sys/kernel/boot_adsp/boot 1
 
 on post-fs-data
-    # MSM specific files that need to be created on /data
-    # We will remap this as /mnt/sdcard with the sdcard fuse tool
-    mkdir /data/media 0775 media_rw media_rw
-    chown media_rw media_rw /data/media
-
     # To observe dnsmasq.leases file for dhcp information of soft ap.
     chown dhcp system /data/misc/dhcp
 
