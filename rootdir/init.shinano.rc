@@ -90,8 +90,7 @@ on post-fs-data
     mkdir /data/audio 0770 media audio
     chmod 2770 /data/audio
 
-    mkdir /data/data/media 0770 media media
-
+    # Create directory for Camera
     mkdir /data/misc/camera 0770 camera camera
 
     # Sensors
