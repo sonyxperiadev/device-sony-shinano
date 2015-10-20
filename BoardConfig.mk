@@ -100,7 +100,7 @@ BOARD_CHARGER_ENABLE_SUSPEND := true
 TARGET_SYSTEM_PROP := device/sony/shinano/system.prop
 
 # NFC
-BOARD_NFC_CHIPSET := pn547
+NFC_NXP_CHIP_TYPE := PN547C2
 BOARD_NFC_HAL_SUFFIX := $(TARGET_BOARD_PLATFORM)
 
 # Include an expanded selection of fonts
