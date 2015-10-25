@@ -228,5 +228,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.data.qmi.adb_logmask=0
 
 # Enable MultiWindow
+ifeq ($(TARGET_BUILD_VARIANT),user)
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.debug.multi_window=true
+endif
