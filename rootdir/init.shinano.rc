@@ -147,13 +147,6 @@ on boot
     chown system system /sys/devices/virtual/input/clearpad/cover_win_right
     chown system system /sys/devices/virtual/input/clearpad/cover_win_top
 
-    # Bring CPUs online
-    write /sys/module/msm_thermal/core_control/enabled 0
-    write /sys/devices/system/cpu/cpu1/online 1
-    write /sys/devices/system/cpu/cpu2/online 1
-    write /sys/devices/system/cpu/cpu3/online 1
-    write /sys/module/msm_thermal/core_control/enabled 1
-
     # Bluetooth device
     chown bluetooth net_bt_stack /dev/ttyHS0
     chmod 0600 /dev/ttyHS0
