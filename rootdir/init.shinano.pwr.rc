@@ -32,6 +32,9 @@ on charger
     write /sys/devices/system/cpu/cpu3/online 0
 
 on boot
+    # Disable thermal
+    write /sys/module/msm_thermal/core_control/enabled 0
+
     # Device boots with performance governor.
     # Switch one core to interactive to set permissions, for power hal and system server.
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
@@ -44,6 +47,12 @@ on boot
     chmod 664 /sys/devices/system/cpu/cpu2/online
     chmod 664 /sys/devices/system/cpu/cpu3/online
 
+    # Bring CPUs online
+    write /sys/devices/system/cpu/cpu0/online 1
+    write /sys/devices/system/cpu/cpu1/online 1
+    write /sys/devices/system/cpu/cpu2/online 1
+    write /sys/devices/system/cpu/cpu3/online 1
+
 on property:service.bootanim.exit=1
     # Enable Power modes
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 300000
@@ -53,12 +62,10 @@ on property:service.bootanim.exit=1
 
 on property:init.svc.bootanim=stopped
     # Switch to ROW and balanced mode after boot for better UX
-    write /sys/module/msm_thermal/core_control/enabled 0
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "interactive"
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "interactive"
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor "interactive"
-    write /sys/module/msm_thermal/core_control/enabled 1
     write /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay "20000 1400000:40000 1700000:20000"
     write /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load 90
     write /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq 1190400
@@ -69,3 +76,6 @@ on property:init.svc.bootanim=stopped
     write /sys/devices/system/cpu/cpufreq/interactive/timer_slack 20000
     write /sys/class/kgsl/kgsl-3d0/devfreq/governor "msm-adreno-tz"
     write /dev/cpuctl/cpu.notify_on_migrate 1
+
+    # Enable thermal
+    write /sys/module/msm_thermal/core_control/enabled 1
