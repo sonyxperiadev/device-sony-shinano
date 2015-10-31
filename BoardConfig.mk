@@ -127,6 +127,7 @@ BOARD_SEPOLICY_UNION += \
     sct.te \
     sensors.te \
     service.te \
+    mlog_qmi.te \
     system_app.te \
     tad.te \
     ta_qmi.te \
