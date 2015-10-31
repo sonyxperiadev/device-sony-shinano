@@ -17,5 +17,6 @@
 /system/vendor/bin/sct_service                u:object_r:sct_exec:s0
 /system/vendor/bin/tad_static                 u:object_r:tad_exec:s0
 /system/vendor/bin/ta_qmi_service             u:object_r:ta_qmi_exec:s0
+/system/vendor/bin/mlog_qmi_service           u:object_r:mlog_qmi_exec:s0
 
 /sys/devices/fb000000.qcom,wcnss-wlan/wcnss_mac_addr    u:object_r:sysfs_addrsetup:s0
