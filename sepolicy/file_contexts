@@ -2,6 +2,7 @@
 /dev/socket/tad                        u:object_r:tad_socket:s0
 
 /dev/pn547                             u:object_r:nfc_device:s0
+/dev/pn54x                             u:object_r:nfc_device:s0
 
 # Block devices
 /dev/block/platform/msm_sdcc\.1/by-name/modemst1          u:object_r:modem_efs_partition_device:s0
