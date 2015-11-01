@@ -34,6 +34,8 @@
 
 #include <hardware/lights.h>
 
+#define UNUSED __attribute__((unused))
+
 static pthread_mutex_t g_lock = PTHREAD_MUTEX_INITIALIZER;
 
 enum {
@@ -248,7 +250,7 @@ static int rgb_to_brightness(struct light_state_t const* state)
 			+ (150*((color>>8)&0x00ff)) + (29*(color&0x00ff))) >> 8;
 }
 
-static int set_light_backlight(struct light_device_t *dev, struct light_state_t const *state)
+static int set_light_backlight(UNUSED struct light_device_t *dev, struct light_state_t const *state)
 {
 	pthread_mutex_lock(&g_lock);
 	write_led_scaled(LED_BACKLIGHT, rgb_to_brightness(state), NULL, 0);
@@ -257,7 +259,7 @@ static int set_light_backlight(struct light_device_t *dev, struct light_state_t 
 	return 0;
 }
 
-static int set_light_mdss(struct light_device_t *dev, struct light_state_t const *state)
+static int set_light_mdss(UNUSED struct light_device_t *dev, struct light_state_t const *state)
 {
 	int brightness = rgb_to_brightness(state);
 
