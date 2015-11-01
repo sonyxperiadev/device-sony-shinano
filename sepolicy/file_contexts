@@ -4,6 +4,9 @@
 /dev/pn547                             u:object_r:nfc_device:s0
 /dev/pn54x                             u:object_r:nfc_device:s0
 
+/dev/tfa98xx                           u:object_r:audio_device:s0
+/system/bin/tfa9890_amp                u:object_r:tfa_amp_exec:s0
+
 # Block devices
 /dev/block/platform/msm_sdcc\.1/by-name/TA                u:object_r:trim_area_partition_device:s0
 
