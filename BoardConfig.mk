@@ -123,6 +123,7 @@ BOARD_SEPOLICY_UNION += \
     addrsetup.te \
     device.te \
     file.te \
+    tfa_amp.te \
     property.te \
     sct.te \
     sensors.te \
