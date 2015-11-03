@@ -121,6 +121,7 @@ BOARD_SEPOLICY_DIRS += \
 
 BOARD_SEPOLICY_UNION += \
     addrsetup.te \
+    bluetooth.te \
     device.te \
     file.te \
     tfa_amp.te \
