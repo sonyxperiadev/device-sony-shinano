@@ -58,10 +58,6 @@ on init
     mkdir /dev/bus 0755 root root
     mkdir /dev/bus/usb 0755 root root
 
-    # Bluetooth address setting
-    setprop ro.bt.bdaddr_path "/data/etc/bluetooth_bdaddr"
-    chown bluetooth bluetooth ${ro.bt.bdaddr_path}
-
 on fs
     mount_all ./fstab.shinano
     setprop ro.crypto.fuse_sdcard true
