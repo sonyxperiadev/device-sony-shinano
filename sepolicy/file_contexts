@@ -1,6 +1,9 @@
 # Trim Area daemon
 /dev/socket/tad                        u:object_r:tad_socket:s0
 
+# Bluetooth
+/dev/ttyHS0                            u:object_r:hci_attach_dev:s0
+
 /dev/pn547                             u:object_r:nfc_device:s0
 /dev/pn54x                             u:object_r:nfc_device:s0
 
@@ -26,3 +29,5 @@
 /sys/devices/fb000000.qcom,wcnss-wlan/wcnss_mac_addr    u:object_r:sysfs_addrsetup:s0
 /sys/devices/platform/bcmdhd_wlan/macaddr               u:object_r:sysfs_addrsetup:s0
 
+# Bluetooth
+/sys/devices/bluesleep.89/rfkill/rfkill0/state          u:object_r:sysfs_bluetooth_writable:s0
