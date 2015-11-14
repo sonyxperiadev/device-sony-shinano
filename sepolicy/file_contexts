@@ -26,6 +26,15 @@
 /system/vendor/bin/ta_qmi_service             u:object_r:ta_qmi_exec:s0
 /system/vendor/bin/mlog_qmi_service           u:object_r:mlog_qmi_exec:s0
 
+# QCOM Blobs moved from /system/bin to /system/vendor/bin
+/system/vendor/bin/irsc_util                  u:object_r:irsc_util_exec:s0
+/system/vendor/bin/mm-qcamera-daemon          u:object_r:mm-qcamerad_exec:s0
+/system/vendor/bin/netmgrd                    u:object_r:netmgrd_exec:s0
+/system/vendor/bin/qmuxd                      u:object_r:qmuxd_exec:s0
+/system/vendor/bin/rmt_storage                u:object_r:rmt_storage_exec:s0
+/system/vendor/bin/sensors.qcom               u:object_r:sensors_exec:s0
+/system/vendor/bin/wcnss_service              u:object_r:wcnss_service_exec:s0
+
 /sys/devices/fb000000.qcom,wcnss-wlan/wcnss_mac_addr    u:object_r:sysfs_addrsetup:s0
 /sys/devices/platform/bcmdhd_wlan/macaddr               u:object_r:sysfs_addrsetup:s0
 
