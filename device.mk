@@ -84,12 +84,7 @@ PRODUCT_PACKAGES += \
     audio.primary.msm8974 \
     audio.r_submix.default \
     audio.usb.default \
-    libaudio-resampler \
-    libacdbloader \
-    libacdbmapper \
-    libaudcal \
-    libaudioalsa \
-    libdiag
+    libaudio-resampler
 
 # For audio.primary.msm8974
 PRODUCT_PACKAGES += \
