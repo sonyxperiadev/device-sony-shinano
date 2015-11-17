@@ -14,22 +14,22 @@ ifeq ($(call is-board-platform-in-list, msm8974), true)
 LOCAL_SRC_FILES += power-8974.c
 endif
 
-ifeq ($(call is-board-platform-in-list, msm8994), true)
-LOCAL_SRC_FILES += power-8994.c
-endif
+#ifeq ($(call is-board-platform-in-list, msm8994), true)
+#LOCAL_SRC_FILES += power-8994.c
+#endif
 
-ifeq ($(call is-board-platform-in-list, msm8992), true)
-LOCAL_SRC_FILES += power-8992.c
-endif
+#ifeq ($(call is-board-platform-in-list, msm8992), true)
+#LOCAL_SRC_FILES += power-8992.c
+#endif
 
 ifneq ($(TARGET_TAP_TO_WAKE_NODE),)
 LOCAL_CFLAGS += -DTAP_TO_WAKE_NODE=\"$(TARGET_TAP_TO_WAKE_NODE)\"
 endif
 
 ifeq ($(TARGET_USES_INTERACTION_BOOST),true)
-    LOCAL_CFLAGS += -DINTERACTION_BOOST
+LOCAL_CFLAGS += -DINTERACTION_BOOST
 endif
 
-LOCAL_MODULE := power.$(TARGET_BOARD_PLATFORM)
+LOCAL_MODULE := power.shinano
 LOCAL_MODULE_TAGS := optional
 include $(BUILD_SHARED_LIBRARY)

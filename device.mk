@@ -163,7 +163,7 @@ PRODUCT_PACKAGES += \
 
 # Power HAL
 PRODUCT_PACKAGES += \
-    power.msm8994
+    power.shinano
 
 # Keystore
 PRODUCT_PACKAGES += \
