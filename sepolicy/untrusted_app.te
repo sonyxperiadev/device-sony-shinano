@@ -1,0 +1,1 @@
+allow untrusted_app thermanager_exec:file { getattr read };
