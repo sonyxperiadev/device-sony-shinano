@@ -127,6 +127,7 @@
                    channels="1" />
         </EncoderProfile>
 
+        <!-- Disable 1080p temporarily: it crashes the camera
         <EncoderProfile quality="1080p" fileFormat="mp4" duration="30">
             <Video codec="h264"
                    bitRate="17000000"
@@ -138,6 +139,7 @@
                    sampleRate="48000"
                    channels="1" />
         </EncoderProfile>
+        -->
 
         <EncoderProfile quality="timelapseqcif" fileFormat="mp4" duration="30">
             <Video codec="h264"
@@ -191,18 +193,21 @@
                    channels="1" />
         </EncoderProfile>
 
+        <!-- Disable 1080p temporarily: it crashes the camera
         <EncoderProfile quality="timelapse1080p" fileFormat="mp4" duration="30">
             <Video codec="h264"
                    bitRate="17000000"
                    width="1920"
                    height="1080"
                    frameRate="30" />
+        -->
             <!-- audio setting is ignored -->
-            <Audio codec="aac"
+        <!--    <Audio codec="aac"
                    bitRate="96000"
                    sampleRate="48000"
                    channels="1" />
         </EncoderProfile>
+        -->
 
         <ImageEncoding quality="95" />
         <ImageEncoding quality="80" />
