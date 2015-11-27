@@ -19,6 +19,9 @@ on early-init
     mount debugfs debugfs /sys/kernel/debug
 
 on init
+    # decrease the display brightness at the startup (actually set to 4095)
+    write /sys/class/leds/lcd-backlight/brightness 2047
+
     # Support legacy libs
     symlink /system/vendor/lib/egl /egl
 
