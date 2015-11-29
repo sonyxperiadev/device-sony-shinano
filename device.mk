@@ -156,15 +156,16 @@ PRODUCT_PACKAGES += \
     wpa_supplicant.conf
 
 
-#CAMERA
+# CAMERA
 PRODUCT_PACKAGES += \
     libmmcamera_interface \
     libmmjpeg_interface \
     libqomx_core \
     camera.msm8974
 
-PRODUCT_PACKAGES += \
-    keystore.msm8974
+# Keystore
+# PRODUCT_PACKAGES += \
+#     keystore.msm8974
 
 # Misc
 PRODUCT_PACKAGES += \
