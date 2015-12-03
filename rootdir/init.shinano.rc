@@ -85,25 +85,8 @@ on post-fs-data
     chown system system /persist
     chmod 0771 /persist
 
-    chmod 0664 /sys/devices/platform/msm_sdcc.1/polling
-    chmod 0664 /sys/devices/platform/msm_sdcc.2/polling
-    chmod 0664 /sys/devices/platform/msm_sdcc.3/polling
-    chmod 0664 /sys/devices/platform/msm_sdcc.4/polling
-
-    # Chown polling nodes as needed from UI running on system server
-    chown system system /sys/devices/platform/msm_sdcc.1/polling
-    chown system system /sys/devices/platform/msm_sdcc.2/polling
-    chown system system /sys/devices/platform/msm_sdcc.3/polling
-    chown system system /sys/devices/platform/msm_sdcc.4/polling
-
     mkdir /data/etc 0775
     mkdir /data/system 0775 system system
-
-    # Create directories for gpsone_daemon services
-    mkdir /data/misc/gpsone_d 0770 system gps
-
-    # Create directories for QuIPS
-    mkdir /data/misc/quipc 0770 gps system
 
     # Create directories for Location services
     mkdir /data/misc/location 0770 gps gps
@@ -130,10 +113,6 @@ on post-fs-data
     chmod 664 /data/system/sensors/settings
 
     chown system /dev/block/platform/msm_sdcc.1/by-name
-
-    # Permissions for mpdecision and thermald
-    mkdir /dev/socket/mpdecision 0770 system system
-    chmod 2770 /dev/socket/mpdecision
 
     setprop vold.post_fs_data_done 1
 
