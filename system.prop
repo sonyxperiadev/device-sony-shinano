@@ -73,3 +73,8 @@ wifi.interface=wlan0
 
 # Conceal color
 persist.vidc.dec.conceal_color=32784
+
+# Camera
+camera.disable_zsl_mode=0
+persist.camera.HAL3.enabled=1
+persist.camera.ois.disable=0
