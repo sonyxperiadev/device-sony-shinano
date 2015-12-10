@@ -71,6 +71,7 @@ AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := true
 # Camera
 USE_DEVICE_SPECIFIC_CAMERA := true
 BOARD_QTI_CAMERA_32BIT_ONLY := true
+BOARD_QTI_CAMERA_V2 := true
 
 # Wi-Fi definitions for Broadcom solution
 BOARD_WLAN_DEVICE           := bcmdhd

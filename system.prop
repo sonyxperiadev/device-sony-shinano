@@ -70,3 +70,8 @@ persist.sys.wfd.virtual=0
 
 # Wi-Fi interface name
 wifi.interface=wlan0
+
+# Camera
+camera.disable_zsl_mode=0
+persist.camera.HAL3.enabled=1
+persist.camera.ois.disable=0
