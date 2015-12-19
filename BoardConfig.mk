@@ -52,6 +52,9 @@ BOARD_FLASH_BLOCK_SIZE := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
 
 TARGET_RECOVERY_FSTAB = device/sony/shinano/rootdir/fstab.shinano
 
+# BoringSSL
+TARGET_REQUIRES_B64_COMPAT := true
+
 # GFX
 USE_OPENGL_RENDERER := true
 TARGET_USES_ION := true
