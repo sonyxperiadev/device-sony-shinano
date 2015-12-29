@@ -156,6 +156,12 @@ on boot
     chmod 0660 /sys/devices/virtual/input/clearpad/glove
     chmod 0660 /sys/devices/virtual/input/max1187x/glove
 
+    # Tap to wake
+    chown system system /sys/devices/virtual/input/clearpad/wakeup_gesture
+    chown system system /sys/devices/virtual/input/max1187x/power/wakeup
+    chmod 0660 /sys/devices/virtual/input/clearpad/wakeup_gesture
+    chmod 0660 /sys/devices/virtual/input/max1187x/power/wakeup
+
     # Bluetooth device
     chown bluetooth net_bt_stack /dev/ttyHS0
     chmod 0600 /dev/ttyHS0
