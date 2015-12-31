@@ -52,13 +52,54 @@ int sysfs_write(char *path, char *s)
     return ret;
 }
 
-static void power_init(struct power_module *module)
+static void power_init(__attribute__((unused)) struct power_module *module)
 {
     ALOGI("Simple PowerHAL is alive!.");
 }
 
-static void power_hint(struct power_module *module, power_hint_t hint,
-                            void *data)
+enum {
+    PROFILE_POWER_SAVE = 0,
+    PROFILE_BALANCED,
+    PROFILE_HIGH_PERFORMANCE
+};
+
+static int current_power_profile = PROFILE_BALANCED;
+
+static void set_power_profile(int profile) {
+
+    if (profile == current_power_profile)
+        return;
+
+    switch (profile) {
+        case PROFILE_POWER_SAVE:
+            sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay", "40000 1100000:80000 1700000:40000");
+            sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load", "90");
+            sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/hispeed_freq", "960000");
+            sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/min_sample_time", "20000");
+            sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/target_loads", "85 1200000:90 1800000:70");
+            sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/timer_rate", "30000");
+            sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/timer_slack", "20000");
+            break;
+
+        case PROFILE_BALANCED:
+        case PROFILE_HIGH_PERFORMANCE:
+            sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay", "20000 1400000:40000 1700000:20000");
+            sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load", "90");
+            sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/hispeed_freq", "1190400");
+            sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/min_sample_time", "40000");
+            sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/target_loads", "85 1500000:90 1800000:70");
+            sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/timer_rate", "30000");
+            sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/timer_slack", "20000");
+            break;
+    }
+
+    current_power_profile = profile;
+}
+
+static int low_power_mode = 0;
+
+static void power_hint(__attribute__((unused)) struct power_module *module,
+                       power_hint_t hint, void *data)
 {
     switch (hint) {
         case POWER_HINT_VSYNC:
@@ -66,12 +107,22 @@ static void power_hint(struct power_module *module, power_hint_t hint,
 
         case POWER_HINT_INTERACTION:
             // When touching the screen, pressing buttons etc.
+            if (data) {
+                ALOGI("Interacting with device, boost speeds for 80000uS");
+                sysfs_write("/sys/devices/system/cpu/cpufreq/interactive/boostpulse", "1");
+            }
             break;
 
         case POWER_HINT_LOW_POWER:
             // When we want to save battery.
             if (data) {
                 ALOGI("Low power mode enabled.");
+                low_power_mode = 1;
+                set_power_profile(PROFILE_POWER_SAVE);
+            } else {
+                ALOGI("Low power mode disabled.");
+                low_power_mode = 0;
+                set_power_profile(PROFILE_BALANCED);
             }
             break;
 
@@ -80,19 +131,25 @@ static void power_hint(struct power_module *module, power_hint_t hint,
     }
 }
 
-static void set_interactive(struct power_module *module, int on)
+static void set_interactive(__attribute__((unused)) struct power_module *module,
+                            int on)
 {
     // set interactive means change governor, cpufreqs etc
     // for when device is awake and ready to be used.
 
     if (!on) {
         ALOGI("Device is asleep.");
+        set_power_profile(PROFILE_POWER_SAVE);
     } else {
         ALOGI("Device is awake.");
+        if (!low_power_mode) {
+            set_power_profile(PROFILE_BALANCED);
+        }
     }
 }
 
-void set_feature(struct power_module *module, feature_t feature, int state)
+void set_feature(__attribute__((unused)) struct power_module *module,
+                 feature_t feature, int state)
 {
 #ifdef TAP_TO_WAKE_NODE
     if (feature == POWER_FEATURE_DOUBLE_TAP_TO_WAKE) {
