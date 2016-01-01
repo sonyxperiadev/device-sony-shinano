@@ -154,6 +154,10 @@ on boot
     chown system system /sys/devices/virtual/input/clearpad/cover_win_right
     chown system system /sys/devices/virtual/input/clearpad/cover_win_top
 
+    # Glove mode
+    chown system system /sys/devices/virtual/input/clearpad/glove
+    chmod 0660 /sys/devices/virtual/input/clearpad/glove
+
     # Bluetooth device
     chown bluetooth net_bt_stack /dev/ttyHS0
     chmod 0600 /dev/ttyHS0
