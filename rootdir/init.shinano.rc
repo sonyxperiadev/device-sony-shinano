@@ -156,7 +156,9 @@ on boot
 
     # Glove mode
     chown system system /sys/devices/virtual/input/clearpad/glove
+    chown system system /sys/devices/virtual/input/max1187x/glove
     chmod 0660 /sys/devices/virtual/input/clearpad/glove
+    chmod 0660 /sys/devices/virtual/input/max1187x/glove
 
     # Bluetooth device
     chown bluetooth net_bt_stack /dev/ttyHS0
