@@ -12,6 +12,7 @@
 
 # Block devices
 /dev/block/platform/msm_sdcc\.1/by-name/TA                u:object_r:trim_area_partition_device:s0
+/dev/block/platform/msm_sdcc\.1/by-name/FOTAKernel        u:object_r:recovery_block_device:s0
 
 /data/etc/bluetooth_bdaddr             u:object_r:addrsetup_data_file:s0
 
