@@ -16,6 +16,7 @@
  */
 
 #include <errno.h>
+#include <stdlib.h>
 #include <string.h>
 #include <fcntl.h>
 
@@ -33,9 +34,36 @@
 static pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
 static int boostpulse_fd = -1;
 
-static int current_power_profile = -1;
+// static int current_power_profile = -1;
+// Force Balanced profile; AOSP does not have profiles like CM.
+static int current_power_profile = 1;
 static int requested_power_profile = -1;
 static int is_low_power_mode = 0;
+static int is_8974ac = -1;
+
+static int is_target_8974ac()
+{
+    int fd;
+    char buf[10] = {0};
+
+    if (is_8974ac >= 0)
+        return is_8974ac;
+
+    fd = open("/sys/devices/soc0/soc_id", O_RDONLY);
+    if (fd >= 0) {
+        if (read(fd, buf, sizeof(buf) - 1) == -1) {
+            ALOGW("%s: Unable to read soc_id", __func__);
+            is_8974ac = 0;
+        } else {
+            int soc_id = atoi(buf);
+            if (soc_id == 194) {
+            is_8974ac = 1;
+            }
+        }
+    }
+    close(fd);
+    return is_8974ac;
+}
 
 static int sysfs_write_str(char *path, char *s)
 {
@@ -91,8 +119,8 @@ static int boostpulse_open()
     return boostpulse_fd;
 }
 
-static void set_power_profile(int profile) {
-
+static void set_power_profile(int profile)
+{
     if (!is_profile_valid(profile)) {
         ALOGE("%s: unknown profile: %d", __func__, profile);
         return;
@@ -124,8 +152,8 @@ static void set_power_profile(int profile) {
                     profiles[profile].min_sample_time);
     sysfs_write_str(INTERACTIVE_PATH "target_loads",
                     profiles[profile].target_loads);
-    sysfs_write_int(CPUFREQ_PATH "scaling_max_freq",
-                    profiles[profile].scaling_max_freq);
+    sysfs_write_int(CPUFREQ_PATH "scaling_max_freq", is_target_8974ac() ?
+                    profiles[profile].scaling_max_freq_ac : profiles[profile].scaling_max_freq_ac);
 
     current_power_profile = profile;
 }
