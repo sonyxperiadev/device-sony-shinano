@@ -156,6 +156,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libmmcamera_interface \
     libmmjpeg_interface \
+    libmm-qcamera \
     libqomx_core \
     camera.msm8974
 
