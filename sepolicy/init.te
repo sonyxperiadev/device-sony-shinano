@@ -29,3 +29,4 @@ allow init uio_device:chr_file write;
 allow init sysfs_wake_lock:file { getattr };
 allow init sysfs_usb_supply:file { getattr };
 allow init sysfs_usb_supply:lnk_file { read getattr };
+allow init mtp_device:chr_file { getattr };
