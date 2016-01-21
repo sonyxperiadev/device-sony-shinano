@@ -44,3 +44,6 @@
 # USB & Power
 /sys/devices/msm_dwc3/power_supply/usb/type             u:object_r:sysfs_usb_supply:s0
 /sys/devices/msm_dwc3/power_supply/usb/device           u:object_r:sysfs_usb_supply:s0
+
+# acdb delta files
+/data/audio/acdbdata/delta(/.*)?                        u:object_r:system_data_file:s0
