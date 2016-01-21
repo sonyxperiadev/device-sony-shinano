@@ -21,6 +21,8 @@ on early-init
 on init
     # Support legacy libs
     symlink /system/vendor/lib/egl /egl
+    chown system system /dev/block/platform/msm_sdcc.1/by-name
+    symlink /dev/block/platform/msm_sdcc.1 /dev/block/bootdevice
 
     # BoringSSL hacks
     export LD_PRELOAD "libboringssl-compat.so"
@@ -79,8 +81,6 @@ on post-fs-data
     mkdir /data/misc/sensors 0775 system system
     write /data/system/sensors/settings 1
     chmod 664 /data/system/sensors/settings
-
-    chown system /dev/block/platform/msm_sdcc.1/by-name
 
     setprop vold.post_fs_data_done 1
 
