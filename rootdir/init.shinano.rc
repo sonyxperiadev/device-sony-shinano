@@ -78,11 +78,7 @@ on post-fs-data
     mkdir /data/misc/camera 0770 camera camera
 
     # Sensors
-    mkdir /data/system 0775 system system
-    mkdir /data/system/sensors 0775 system system
     mkdir /data/misc/sensors 0775 system system
-    write /data/system/sensors/settings 1
-    chmod 664 /data/system/sensors/settings
 
     chown system /dev/block/platform/msm_sdcc.1/by-name
 
