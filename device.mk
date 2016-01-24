@@ -158,7 +158,6 @@ PRODUCT_PACKAGES += \
     wpa_supplicant \
     wpa_supplicant.conf
 
-
 #CAMERA
 PRODUCT_PACKAGES += \
     libmmcamera_interface \
@@ -193,6 +192,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     InCallUI \
     Launcher3
+
+PRODUCT_PACKAGES += \
+    libxml2
 
 PRODUCT_PACKAGES += \
     libemoji
