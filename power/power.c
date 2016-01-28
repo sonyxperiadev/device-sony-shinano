@@ -209,7 +209,7 @@ static void power_hint(__attribute__((unused)) struct power_module *module,
 
         case POWER_HINT_LOW_POWER:
             pthread_mutex_lock(&lock);
-            set_low_power_mode(*(int32_t *)data ? 1 : 0);
+            set_low_power_mode(*((intptr_t *)data));
             pthread_mutex_unlock(&lock);
             break;
 
