@@ -20,14 +20,6 @@ LOCAL_MODULE_RELATIVE_PATH := hw
 LOCAL_SHARED_LIBRARIES := liblog libcutils
 LOCAL_SRC_FILES := power.c
 
-ifneq ($(TARGET_TAP_TO_WAKE_NODE),)
-    LOCAL_CFLAGS += -DTAP_TO_WAKE_NODE=\"$(TARGET_TAP_TO_WAKE_NODE)\"
-
-ifeq ($(TARGET_TAP_TO_WAKE_STRING),true)
-    LOCAL_CFLAGS += -DTAP_TO_WAKE_STRING
-endif
-endif
-
 LOCAL_MODULE := power.shinano
 
 LOCAL_MODULE_TAGS := optional

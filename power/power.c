@@ -243,22 +243,6 @@ static void set_interactive(__attribute__((unused)) struct power_module *module,
     }
 }
 
-void set_feature(__attribute__((unused)) struct power_module *module,
-                 feature_t feature, int state)
-{
-#ifdef TAP_TO_WAKE_NODE
-    if (feature == POWER_FEATURE_DOUBLE_TAP_TO_WAKE) {
-            ALOGI("Double tap to wake is %s.", state ? "enabled" : "disabled");
-#ifdef TAP_TO_WAKE_STRING
-            sysfs_write_str(TAP_TO_WAKE_NODE, state ? "enabled" : "disabled");
-#else
-            sysfs_write_str(TAP_TO_WAKE_NODE, state ? "1" : "0");
-#endif
-        return;
-    }
-#endif
-}
-
 static struct hw_module_methods_t power_module_methods = {
     .open = NULL,
 };
@@ -266,7 +250,7 @@ static struct hw_module_methods_t power_module_methods = {
 struct power_module HAL_MODULE_INFO_SYM = {
     .common = {
         .tag = HARDWARE_MODULE_TAG,
-        .module_api_version = POWER_MODULE_API_VERSION_0_3,
+        .module_api_version = POWER_MODULE_API_VERSION_0_2,
         .hal_api_version = HARDWARE_HAL_API_VERSION,
         .id = POWER_HARDWARE_MODULE_ID,
         .name = "Simple Power HAL",
@@ -277,5 +261,4 @@ struct power_module HAL_MODULE_INFO_SYM = {
     .init = power_init,
     .powerHint = power_hint,
     .setInteractive = set_interactive,
-    .setFeature = set_feature,
 };
