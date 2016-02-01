@@ -22,9 +22,6 @@ on init
     # Support legacy libs
     #symlink /system/vendor/lib/egl /egl
 
-    # BoringSSL hacks
-    #export LD_PRELOAD "libboringssl-compat.so"
-
     mkdir /dev/bus 0755 root root
     mkdir /dev/bus/usb 0755 root root
 
