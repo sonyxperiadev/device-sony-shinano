@@ -21,55 +21,24 @@ TARGET_CPU_VARIANT := krait
 TARGET_GLOBAL_CFLAGS += -mfpu=neon -mfloat-abi=softfp
 TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
 
-TARGET_NO_RADIOIMAGE := true
-TARGET_NO_BOOTLOADER := true
-TARGET_NO_RECOVERY := false
-TARGET_NO_KERNEL := false
-
 BOARD_KERNEL_BASE        := 0x00000000
 BOARD_KERNEL_PAGESIZE    := 2048
 BOARD_KERNEL_TAGS_OFFSET := 0x01E00000
 BOARD_RAMDISK_OFFSET     := 0x02000000
 
-BOARD_KERNEL_BOOTIMG := true
-BOARD_CUSTOM_MKBOOTIMG := mkqcdtbootimg
-BOARD_MKBOOTIMG_ARGS := --ramdisk_offset $(BOARD_RAMDISK_OFFSET) --tags_offset $(BOARD_KERNEL_TAGS_OFFSET)
-BOARD_MKBOOTIMG_ARGS += --dt_dir $(OUT)/dtbs
-
-BOARD_KERNEL_CMDLINE := androidboot.hardware=shinano androidboot.selinux=permissive
-BOARD_KERNEL_CMDLINE += user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3
+BOARD_KERNEL_CMDLINE := androidboot.hardware=shinano
+BOARD_KERNEL_CMDLINE += user_debug=31 androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE += msm_rtb.filter=0x37 ehci-hcd.park=3
 BOARD_KERNEL_CMDLINE += dwc3.maximum_speed=high dwc3_msm.prop_chg_detect=Y
 BOARD_KERNEL_CMDLINE += console=ttyHSL0,115200,n8
 BOARD_KERNEL_CMDLINE += coherent_pool=8M vmalloc=400M
 
-TARGET_USERIMAGES_USE_EXT4 := true
-BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2671771648
 BOARD_CACHEIMAGE_PARTITION_SIZE := 209715200
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2671771648
+BOARD_BOOTIMAGE_PARTITION_SIZE := 20971520
 BOARD_FLASH_BLOCK_SIZE := 131072 # (BOARD_KERNEL_PAGESIZE * 64)
 
 TARGET_RECOVERY_FSTAB = device/sony/shinano/rootdir/fstab.shinano
-
-# GFX
-USE_OPENGL_RENDERER := true
-TARGET_USES_ION := true
-TARGET_USES_OVERLAY := true
-TARGET_USES_SF_BYPASS := true
-TARGET_USES_C2D_COMPOSITION := true
-
-MAX_EGL_CACHE_KEY_SIZE := 12*1024
-MAX_EGL_CACHE_SIZE := 2048*1024
-OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
-NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
-
-# Audio
-BOARD_USES_ALSA_AUDIO := true
-AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := true
-
-# Camera
-USE_DEVICE_SPECIFIC_CAMERA := true
-BOARD_QTI_CAMERA_32BIT_ONLY := true
-BOARD_QTI_CAMERA_V2 := true
 
 # Wi-Fi definitions for Broadcom solution
 BOARD_WLAN_DEVICE           := bcmdhd
@@ -88,34 +57,12 @@ BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
 BOARD_BLUEDROID_VENDOR_CONF := device/sony/shinano/bluetooth/vnd_generic.txt
 
-# GPS definitions for Qualcomm solution
-BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := $(TARGET_BOARD_PLATFORM)
-TARGET_NO_RPC := true
-
-# Charger
-BOARD_CHARGER_ENABLE_SUSPEND := true
-
-TARGET_SYSTEM_PROP := device/sony/shinano/system.prop
-
 # NFC
 BOARD_NFC_CHIPSET := pn547
 BOARD_NFC_HAL_SUFFIX := $(TARGET_BOARD_PLATFORM)
 
-# Include an expanded selection of fonts
-EXTENDED_FONT_FOOTPRINT := true
-
-# Enable dex-preoptimization to speed up first boot sequence
-ifeq ($(HOST_OS),linux)
-    WITH_DEXPREOPT ?= true
-endif
-
-BUILD_KERNEL := true
--include vendor/sony/kernel/KernelConfig.mk
-
-# Include build helpers for QCOM proprietary
--include vendor/qcom/proprietary/common/build/proprietary-build.mk
-
-BOARD_SEPOLICY_DIRS += \
-    device/sony/shinano/sepolicy
+# SELinux
+BOARD_SEPOLICY_DIRS += device/sony/shinano/sepolicy
 
 BOARD_SEPOLICY_UNION += \
+
