@@ -128,11 +128,13 @@ BOARD_SEPOLICY_UNION += \
     bluetooth.te \
     device.te \
     file.te \
+    installd.te \
     tfa_amp.te \
     property.te \
     sct.te \
     sensors.te \
     service.te \
+    mediaserver.te \
     mlog_qmi.te \
     system_app.te \
     tad.te \
