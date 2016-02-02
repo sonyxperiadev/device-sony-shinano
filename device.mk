@@ -16,8 +16,6 @@ SOMC_PLATFORM := shinano
 
 SONY_ROOT = device/sony/shinano/rootdir
 
-DEVICE_PACKAGE_OVERLAYS += device/sony/shinano/overlay
-
 # Init
 PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/fstab.shinano:root/fstab.shinano \
