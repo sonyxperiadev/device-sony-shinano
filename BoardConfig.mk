@@ -62,6 +62,3 @@ NFC_NXP_CHIP_TYPE := PN547C2
 
 # SELinux
 BOARD_SEPOLICY_DIRS += device/sony/shinano/sepolicy
-
-# BoringSSL
-TARGET_REQUIRES_B64_COMPAT := true
