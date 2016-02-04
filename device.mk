@@ -16,14 +16,10 @@ SOMC_PLATFORM := shinano
 
 SONY_ROOT = device/sony/shinano/rootdir
 
-# Init
+# Platform Init
 PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/fstab.shinano:root/fstab.shinano \
-    $(SONY_ROOT)/init.recovery.shinano.rc:root/init.recovery.shinano.rc \
-    $(SONY_ROOT)/init.shinano.rc:root/init.shinano.rc \
-    $(SONY_ROOT)/init.shinano.usb.rc:root/init.shinano.usb.rc \
-    $(SONY_ROOT)/init.shinano.pwr.rc:root/init.shinano.pwr.rc \
-    $(SONY_ROOT)/ueventd.shinano.rc:root/ueventd.shinano.rc
+    $(SONY_ROOT)/init.shinano.pwr.rc:root/init.shinano.pwr.rc
 
 # Media
 PRODUCT_COPY_FILES += \
@@ -80,14 +76,6 @@ PRODUCT_PACKAGES += \
 # Keymaster
 PRODUCT_PACKAGES += \
     keystore.msm8974
-
-# Lights
-PRODUCT_PACKAGES += \
-    lights.shinano
-
-# Simple PowerHAL
-PRODUCT_PACKAGES += \
-    power.shinano
 
 # RILD
 PRODUCT_PROPERTY_OVERRIDES += \
