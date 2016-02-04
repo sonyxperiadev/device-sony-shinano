@@ -19,15 +19,6 @@ SOMC_PLATFORM := shinano
 
 SONY_ROOT = device/sony/shinano/rootdir
 
-# Init
-PRODUCT_COPY_FILES += \
-    $(SONY_ROOT)/fstab.shinano:root/fstab.shinano \
-    $(SONY_ROOT)/init.recovery.shinano.rc:root/init.recovery.shinano.rc \
-    $(SONY_ROOT)/init.shinano.rc:root/init.shinano.rc \
-    $(SONY_ROOT)/init.shinano.usb.rc:root/init.shinano.usb.rc \
-    $(SONY_ROOT)/init.shinano.pwr.rc:root/init.shinano.pwr.rc \
-    $(SONY_ROOT)/ueventd.shinano.rc:root/ueventd.shinano.rc
-
 # Media
 PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/system/etc/audio_effects.conf:system/vendor/etc/audio_effects.conf \
@@ -54,6 +45,11 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.sensor.barometer.xml:system/etc/permissions/android.hardware.sensor.barometer.xml \
     frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml
+
+# Platform Init
+PRODUCT_PACKAGES += \
+    fstab.shinano \
+    init.shinano.pwr \
 
 # NFC packages
 PRODUCT_PACKAGES += \
@@ -85,14 +81,6 @@ PRODUCT_PACKAGES += \
 # Keymaster
 PRODUCT_PACKAGES += \
     keystore.msm8974
-
-# Lights
-PRODUCT_PACKAGES += \
-    lights.shinano
-
-# Simple PowerHAL
-PRODUCT_PACKAGES += \
-    power.shinano
 
 # RILD
 PRODUCT_PROPERTY_OVERRIDES += \
