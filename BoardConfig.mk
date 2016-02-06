@@ -56,5 +56,3 @@ BOARD_BLUEDROID_VENDOR_CONF := device/sony/shinano/bluetooth/vnd_generic.txt
 # NFC
 NFC_NXP_CHIP_TYPE := PN547C2
 
-# SELinux
-BOARD_SEPOLICY_DIRS += device/sony/shinano/sepolicy
