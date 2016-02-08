@@ -12,8 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-include device/sony/common/CommonConfig.mk
-
 TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_BOARD_PLATFORM := msm8974
@@ -63,3 +61,5 @@ BOARD_NFC_HAL_SUFFIX := $(TARGET_BOARD_PLATFORM)
 BOARD_SEPOLICY_DIRS += device/sony/shinano/sepolicy
 
 BOARD_SEPOLICY_UNION += \
+
+include device/sony/common/CommonConfig.mk
