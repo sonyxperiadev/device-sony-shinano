@@ -8,5 +8,5 @@
 /dev/block/bootdevice/by-name/boot         /boot        emmc    defaults                                                      defaults
 /dev/block/bootdevice/by-name/FOTAKernel   /recovery    emmc    defaults                                                      defaults
 
-/devices/msm_sdcc.2/mmc_host*              auto         auto    nosuid,nodev                                                  voldmanaged=sdcard1:auto,noemulatedsd
+/devices/msm_sdcc.*/mmc_host/mmc2*         auto         auto    nosuid,nodev                                                  voldmanaged=sdcard1:auto,noemulatedsd
 /devices/platform/xhci-hcd                 auto         auto    nosuid,nodev                                                  voldmanaged=usbdisk:auto
