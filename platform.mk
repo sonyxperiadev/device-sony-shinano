@@ -17,7 +17,7 @@ $(call inherit-product, device/sony/common/common.mk)
 
 SOMC_PLATFORM := shinano
 
-SONY_ROOT = device/sony/shinano/rootdir
+SONY_ROOT := device/sony/shinano/rootdir
 
 # Media
 PRODUCT_COPY_FILES += \
