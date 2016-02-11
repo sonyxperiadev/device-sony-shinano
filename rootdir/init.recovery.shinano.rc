@@ -1,5 +1,5 @@
 on init
-    symlink /dev/block/platform/soc.0/f9824900.sdhci /dev/block/bootdevice
+    symlink /dev/block/platform/msm_sdcc.1 /dev/block/bootdevice
 
 on boot
     write /sys/class/android_usb/android0/idVendor 0FCE
