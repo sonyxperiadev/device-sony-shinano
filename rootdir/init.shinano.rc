@@ -24,21 +24,6 @@ on fs
     write /sys/kernel/boot_adsp/boot 1
 
 on boot
-    # PM8941 flash
-    chown media system /sys/class/misc/pm8941-flash/device/current1
-    chown media system /sys/class/misc/pm8941-flash/device/current2
-    chown media system /sys/class/misc/pm8941-flash/device/fault_status
-    chown media system /sys/class/misc/pm8941-flash/device/fine_current1
-    chown media system /sys/class/misc/pm8941-flash/device/fine_current2
-    chown media system /sys/class/misc/pm8941-flash/device/flash_timer
-    chown media system /sys/class/misc/pm8941-flash/device/mask_clamp_current
-    chown media system /sys/class/misc/pm8941-flash/device/mask_enable
-    chown media system /sys/class/misc/pm8941-flash/device/max_current
-    chown media system /sys/class/misc/pm8941-flash/device/mode
-    chown media system /sys/class/misc/pm8941-flash/device/startup_delay
-    chown media system /sys/class/misc/pm8941-flash/device/strobe
-    chown media system /sys/class/misc/pm8941-flash/device/vph_pwr_droop
-
     # Cover mode
     chown system system /sys/devices/virtual/input/clearpad/cover_mode_enabled
     chown system system /sys/devices/virtual/input/clearpad/cover_win_bottom
