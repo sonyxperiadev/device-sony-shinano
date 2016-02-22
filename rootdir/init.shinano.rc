@@ -52,6 +52,7 @@ on boot
     chmod 0660 /proc/bluetooth/sleep/btwrite
 
     # Symlink for compability
+    symlink /dev/pn54x /dev/pn544
     symlink /dev/pn54x /dev/pn547
 
 # TFA AMP
