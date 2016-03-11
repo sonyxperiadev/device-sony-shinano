@@ -49,7 +49,7 @@ PRODUCT_COPY_FILES += \
 # Platform Init
 PRODUCT_PACKAGES += \
     fstab.shinano \
-    init.shinano.pwr \
+    init.shinano.pwr
 
 # NFC packages
 PRODUCT_PACKAGES += \
