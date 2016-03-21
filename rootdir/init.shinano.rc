@@ -16,9 +16,6 @@ import init.common.rc
 import init.common.usb.rc
 import init.shinano.pwr.rc
 
-on init
-    symlink /dev/block/platform/msm_sdcc.1 /dev/block/bootdevice
-
 on fs
     mount_all ./fstab.shinano
     write /sys/kernel/boot_adsp/boot 1
