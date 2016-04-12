@@ -21,7 +21,6 @@ SONY_ROOT := device/sony/shinano/rootdir
 
 # Media
 PRODUCT_COPY_FILES += \
-    $(SONY_ROOT)/system/etc/audio_effects.conf:system/vendor/etc/audio_effects.conf \
     $(SONY_ROOT)/system/etc/audio_platform_info.xml:system/etc/audio_platform_info.xml \
     $(SONY_ROOT)/system/etc/media_codecs.xml:system/etc/media_codecs.xml \
     $(SONY_ROOT)/system/etc/media_profiles.xml:system/etc/media_profiles.xml
