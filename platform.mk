@@ -19,6 +19,10 @@ SOMC_PLATFORM := shinano
 
 SONY_ROOT := device/sony/shinano/rootdir
 
+# Common Overlay
+DEVICE_PACKAGE_OVERLAYS += \
+    device/sony/shinano/overlay
+
 # Media
 PRODUCT_COPY_FILES += \
     $(SONY_ROOT)/system/etc/audio_platform_info.xml:system/etc/audio_platform_info.xml \
