@@ -75,7 +75,7 @@ int tfa9890_prepare_for_ioctl(const char *file_name, unsigned int type) {
 
 int tfa9890_prepare_for_ioctl_eq(const char *file_name, unsigned int type) {
 	unsigned int size;
-	unsigned char buf[PARAM_SIZE_MAX];
+	unsigned char buf[PARAM_SIZE_MAX] = {0};
 
 	ALOGV("Preparing %s", file_name);
 
@@ -88,12 +88,12 @@ int tfa9890_prepare_for_ioctl_eq(const char *file_name, unsigned int type) {
 	memcpy(buf, eq_data[type], size);
 
 	/* Set the data for the ioctl arg */
-	if (size)
+	if (size) {
 		tfa9890_param_data.size = size;
+		tfa9890_param_data.data = buf;
+	}
 	if (type)
 		tfa9890_param_data.type = type;
-	if (buf != NULL)
-		tfa9890_param_data.data = buf;
 
 	return 0;
 }
