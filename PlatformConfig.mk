@@ -61,6 +61,9 @@ BOARD_CUSTOM_BT_CONFIG := device/sony/shinano/bluetooth/vnd_generic.txt
 # NFC
 NFC_NXP_CHIP_TYPE := PN547C2
 
+# Props for hotplugging
+TARGET_SYSTEM_PROP += device/sony/shinano/system.prop
+
 # SELinux
 BOARD_SEPOLICY_DIRS += device/sony/shinano/sepolicy
 
