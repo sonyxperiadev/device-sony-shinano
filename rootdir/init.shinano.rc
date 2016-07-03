@@ -32,8 +32,8 @@ on boot
     chown system system /sys/devices/virtual/input/clearpad/cover_win_top
 
     # Tap to wake
-    chown system system /sys/devices/virtual/input/max1187x/power/wakeup
-    chmod 0660 /sys/devices/virtual/input/max1187x/power/wakeup
+    chown system system /sys/devices/virtual/input/max1187x/wakeup_gesture
+    chmod 0660 /sys/devices/virtual/input/max1187x/wakeup_gesture
     chown system system /sys/devices/virtual/input/clearpad/wakeup_gesture
     chmod 0660 /sys/devices/virtual/input/clearpad/wakeup_gesture
 
