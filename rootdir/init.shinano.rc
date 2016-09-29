@@ -21,6 +21,7 @@ on init
 
 on fs
     mount_all ./fstab.shinano
+    swapon_all ./fstab.shinano
     write /sys/kernel/boot_adsp/boot 1
 
 on boot
