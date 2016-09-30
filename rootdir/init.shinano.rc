@@ -61,12 +61,14 @@ service tfa9890_amp /system/bin/tfa9890_amp
     user root
     group root
     oneshot
+    writepid /dev/cpuset/system-background/tasks
 
 # OSS WLAN and BT MAC setup
 service macaddrsetup /system/bin/macaddrsetup /sys/devices/platform/bcmdhd_wlan/macaddr
     user root
     disabled
     oneshot
+    writepid /dev/cpuset/system-background/tasks
 
 service wpa_supplicant /system/bin/wpa_supplicant \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
@@ -101,6 +103,7 @@ service uim /system/bin/brcm-uim-sysfs
     class late_start
     user root
     group bluetooth net_bt_admin net_bt
+    writepid /dev/cpuset/system-background/tasks
 
 on property:vold.post_fs_data_done=1
     # Generate Bluetooth MAC address file only when /data is ready
