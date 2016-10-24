@@ -25,6 +25,9 @@ on fs
     write /sys/kernel/boot_adsp/boot 1
 
 on boot
+    # Bluetooth
+    chown system system /sys/devices/platform/bcmdhd_wlan/macaddr
+
     # Cover mode
     chown system system /sys/devices/virtual/input/clearpad/cover_mode_enabled
     chown system system /sys/devices/virtual/input/clearpad/cover_win_bottom
@@ -81,7 +84,9 @@ service tfa9890_amp /system/bin/tfa9890_amp
 
 # OSS WLAN and BT MAC setup
 service macaddrsetup /system/bin/macaddrsetup /sys/devices/platform/bcmdhd_wlan/macaddr
-    user root
+    class core
+    user system
+    group system bluetooth
     disabled
     oneshot
     writepid /dev/cpuset/system-background/tasks
@@ -124,10 +129,6 @@ service uim /system/bin/brcm-uim-sysfs
 on property:vold.post_fs_data_done=1
     # Generate Bluetooth MAC address file only when /data is ready
     start macaddrsetup
-    # Wait for the file to be created by macaddrsetup
-    wait /data/etc/bluetooth_bdaddr
-    chown bluetooth bluetooth /data/etc/bluetooth_bdaddr
 
 on property:bluetooth.isEnabled=true
     write /sys/class/bluetooth/hci0/idle_timeout 7000
-
