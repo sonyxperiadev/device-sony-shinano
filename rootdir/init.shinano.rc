@@ -25,12 +25,8 @@ on fs
     write /sys/kernel/boot_adsp/boot 1
 
 on boot
-    # WLAN
-    chown system system /sys/devices/platform/bcmdhd_wlan/macaddr
-    
     # Bluetooth
-    chown system system /data/misc/bluetooth/bluetooth_bdaddr
-    chmod 660 /data/misc/bluetooth/bluetooth_bdaddr
+    chown system system /sys/devices/platform/bcmdhd_wlan/macaddr
 
     # Cover mode
     chown system system /sys/devices/virtual/input/clearpad/cover_mode_enabled
