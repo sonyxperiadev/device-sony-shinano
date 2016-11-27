@@ -155,3 +155,6 @@
 /sys/devices/system/cpu/cpuquiet/rqbalance/balance_level             0660 system system
 /sys/devices/system/cpu/cpuquiet/rqbalance/nr_run_thresholds         0660 system system
 /sys/devices/system/cpu/cpuquiet/rqbalance/nr_down_run_thresholds    0660 system system
+
+# BT/FM/ANT+ V4L2
+/dev/brcm_bt_drv          0660   bluetooth  net_bt_stack
