@@ -124,6 +124,7 @@ service uim /system/bin/brcm-uim-sysfs
     class late_start
     user root
     group bluetooth net_bt_admin net_bt
+    seclabel u:r:uim:s0
     writepid /dev/cpuset/system-background/tasks
 
 on property:vold.post_fs_data_done=1
