@@ -9,4 +9,4 @@
 /dev/block/bootdevice/by-name/FOTAKernel   /recovery    emmc    defaults                                                      defaults
 
 /devices/msm_sdcc.*/mmc_host/mmc2*         auto         auto    nosuid,nodev                                                  voldmanaged=sdcard1:auto,noemulatedsd
-/devices/platform/xhci-hcd                 auto         auto    nosuid,nodev                                                  voldmanaged=usbdisk:auto
+/devices/*/xhci-hcd.0.auto/usb*            auto         auto    defaults                                                      voldmanaged=usbdisk:auto
