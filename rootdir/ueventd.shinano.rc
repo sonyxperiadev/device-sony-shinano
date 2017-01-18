@@ -105,7 +105,6 @@
 /sys/devices/virtual/switch/wfd         state       0660 system system
 
 # NFC
-/dev/pn547                                          0660 nfc nfc
 /dev/pn54x                                          0660 nfc nfc
 /sys/devices/f9928000.i2c/i2c-3/3-0028  init_deinit 0200 nfc nfc
 /sys/devices/f9928000.i2c/i2c-3/3-0028  set_pwr     0200 nfc nfc
