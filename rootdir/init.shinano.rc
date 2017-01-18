@@ -55,9 +55,6 @@ on boot
     chmod 0660 /proc/bluetooth/sleep/lpm
     chmod 0660 /proc/bluetooth/sleep/btwrite
 
-    # Symlink for compability
-    symlink /dev/pn54x /dev/pn547
-
     # add a cpuset for the camera daemon
     mkdir /dev/cpuset/camera-daemon
     write /dev/cpuset/camera-daemon/cpus 0
