@@ -48,8 +48,6 @@ static inline const char* getBTDefaultName()
 #define BTM_DEF_LOCAL_NAME getBTDefaultName()
 #endif // OS_GENERIC
 
-#define HCILP_INCLUDED FALSE
-
 /* #define BTA_AV_CO_CP_SCMS_T   TRUE */
 #define SDP_AVRCP_1_5   FALSE
 
