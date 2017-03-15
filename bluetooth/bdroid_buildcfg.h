@@ -20,8 +20,6 @@
 #include <cutils/properties.h>
 #include <string.h>
 
-#define HCILP_INCLUDED FALSE
-
 inline const char* getBTDefaultName()
 {
     char device[PROPERTY_VALUE_MAX];
