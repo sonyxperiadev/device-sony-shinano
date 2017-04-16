@@ -89,6 +89,10 @@ PRODUCT_PACKAGES += \
     brcm-uim-sysfs \
     libfmjni
 
+# Cam FPS
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.debug.set.fixedfps=15
+
 # RILD
 PRODUCT_PROPERTY_OVERRIDES += \
     rild.libpath=/vendor/lib/libril-qc-qmi-1.so \
