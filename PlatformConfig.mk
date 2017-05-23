@@ -22,6 +22,9 @@ TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_VARIANT := krait
 
+# Kernel Version
+TARGET_KERNEL_VERSION := 3.10
+
 ENABLE_CPUSETS := true
 
 BOARD_KERNEL_BASE        := 0x00000000
