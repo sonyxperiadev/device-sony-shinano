@@ -113,15 +113,15 @@
 /sys/devices/f9928000.i2c/i2c-3/3-0028  send_cmd    0200 nfc nfc
 
 # LED
-/sys/devices/01-qcom,leds-d000/leds/led:* max_brightness          0664 system system
-/sys/devices/01-qcom,leds-d000/leds/led:* brightness              0664 system system
-/sys/devices/01-qcom,leds-d000/leds/led:* blink                   0664 system system
-/sys/devices/01-qcom,leds-d000/leds/led:* duty_pcts               0664 system system
-/sys/devices/01-qcom,leds-d000/leds/led:* ramp_step_ms            0664 system system
-/sys/devices/01-qcom,leds-d800/leds/wled:backlight max_brightness 0664 system system
-/sys/devices/01-qcom,leds-d800/leds/wled:backlight brightness     0664 system system
-/sys/class/leds/lcd-backlight/max_brightness                      0644 root system
-/sys/class/leds/lcd-backlight/brightness                          0664 system system
+/sys/devices/leds-qpnp-23/leds/led:* max_brightness          0664 system system
+/sys/devices/leds-qpnp-23/leds/led:* brightness              0664 system system
+/sys/devices/leds-qpnp-23/leds/led:* blink                   0664 system system
+/sys/devices/leds-qpnp-23/leds/led:* duty_pcts               0664 system system
+/sys/devices/leds-qpnp-23/leds/led:* ramp_step_ms            0664 system system
+/sys/devices/leds-qpnp-25/leds/wled:backlight max_brightness 0664 system system
+/sys/devices/leds-qpnp-25/leds/wled:backlight brightness     0664 system system
+/sys/class/leds/lcd-backlight/max_brightness                 0644 root system
+/sys/class/leds/lcd-backlight/brightness                     0664 system system
 
 # IR Remote
 /dev/ttyHSL1                                   0660 system system
