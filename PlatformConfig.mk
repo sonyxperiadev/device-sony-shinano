@@ -68,6 +68,7 @@ NFC_NXP_CHIP_TYPE := PN547C2
 
 # NFC firmware select
 NXP_CHIP_TYPE := PN547C2
+NXP_CHIP_FW_TYPE := PN547C2
 
 # FM definitions for Broadcom solution
 BOARD_HAVE_ALTERNATE_FM := true
