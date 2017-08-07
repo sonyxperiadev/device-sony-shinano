@@ -143,3 +143,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.HAL3.enabled=0 \
     media.stagefright.less-secure=true \
     media.stagefright.legacyencoder=true
+
+# FM Radio Dep
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.rfkilldisabled=1
