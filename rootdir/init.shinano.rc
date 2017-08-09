@@ -17,9 +17,11 @@ import init.common.usb-legacy.rc
 import init.shinano.pwr.rc
 
 on init
-    symlink /dev/block/platform/msm_sdcc.1 /dev/block/bootdevice
+    write /sys/block/zram0/max_comp_streams 4
 
 on fs
+    symlink /dev/block/platform/msm_sdcc.1 /dev/block/bootdevice
+
     mount_all ./fstab.shinano
     swapon_all ./fstab.shinano
     write /sys/kernel/boot_adsp/boot 1
