@@ -86,6 +86,11 @@ PRODUCT_PACKAGES += \
     brcm-uim-sysfs \
     libfmjni
 
+# RILD
+PRODUCT_PROPERTY_OVERRIDES += \
+    rild.libpath=/vendor/lib/libril-qc-qmi-1.so \
+    ril.subscription.types=NV,RUIM
+
 # system prop for opengles version
 # 196608 is decimal for 0x30000 to
 # report major/minor versions as 3
