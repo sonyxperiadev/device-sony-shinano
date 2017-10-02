@@ -1,4 +1,4 @@
-ifeq ($(filter-out aries castor castor_windy leo scorpion scorpion_windy sirius,$(TARGET_DEVICE)),)
+ifeq (shinano,$(PRODUCT_PLATFORM))
 
 LOCAL_PATH := $(call my-dir)
 
