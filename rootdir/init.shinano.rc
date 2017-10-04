@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import init.common.rc
+import init.common.srv-legacy.rc
 import init.common.usb-legacy.rc
 import init.shinano.pwr.rc
 
