@@ -39,3 +39,29 @@
 /dev/block/bootdevice/by-name/apps_log                         u:object_r:misc_block_device:s0
 
 /dev/block/zram0                                               u:object_r:swap_block_device:s0
+
+###################################
+# System files
+#
+/system/vendor/bin/adsprpcd                     u:object_r:adsprpcd_exec:s0
+/system/vendor/bin/irsc_util                    u:object_r:irsc_util_exec:s0
+/system/vendor/bin/mlog_qmi_service             u:object_r:mlog_qmi_exec:s0
+/system/vendor/bin/mm-qcamera-daemon            u:object_r:mm-qcamerad_exec:s0
+/system/vendor/bin/msm_irqbalance               u:object_r:msm_irqbalanced_exec:s0
+/system/vendor/bin/netmgrd                      u:object_r:netmgrd_exec:s0
+/system/vendor/bin/pad_controller               u:object_r:pad_controller_exec:s0
+/system/vendor/bin/pm-service                   u:object_r:per_mgr_exec:s0
+/system/vendor/bin/pm-proxy                     u:object_r:per_mgr_exec:s0
+/system/vendor/bin/pd-mapper                    u:object_r:pd_mapper_exec:s0
+/system/vendor/bin/qmuxd                        u:object_r:qmuxd_exec:s0
+/system/vendor/bin/qseecomd                     u:object_r:tee_exec:s0
+/system/vendor/bin/rmt_storage                  u:object_r:rmt_storage_exec:s0
+/system/vendor/bin/sct_service                  u:object_r:sct_exec:s0
+/system/vendor/bin/sensors.qcom                 u:object_r:sensors_exec:s0
+/system/vendor/bin/tad_static                   u:object_r:tad_exec:s0
+/system/vendor/bin/ta_qmi_service               u:object_r:ta_qmi_exec:s0
+/system/vendor/bin/tftp_server                  u:object_r:tad_exec:s0
+/system/vendor/bin/touch_fusion                 u:object_r:touchfusion_exec:s0
+/system/vendor/bin/wcnss_filter                 u:object_r:start_hci_filter_exec:s0
+/system/vendor/bin/wcnss_service                u:object_r:wcnss_service_exec:s0
+/system/vendor/bin/cnss-daemon                  u:object_r:cnss-daemon_exec:s0
