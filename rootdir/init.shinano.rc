@@ -75,7 +75,7 @@ on boot
     write /dev/cpuset/top-app/cpus 0-3
 
 # TFA AMP
-service tfa9890_amp /system/bin/tfa9890_amp
+service tfa9890_amp /system/vendor/bin/tfa9890_amp
     class late_start
     user root
     group root
@@ -83,7 +83,7 @@ service tfa9890_amp /system/bin/tfa9890_amp
     writepid /dev/cpuset/system-background/tasks
 
 # OSS WLAN and BT MAC setup
-service macaddrsetup /system/bin/macaddrsetup /sys/devices/platform/bcmdhd_wlan/macaddr
+service macaddrsetup /system/vendor/bin/macaddrsetup /sys/devices/platform/bcmdhd_wlan/macaddr
     class core
     user system
     group system bluetooth
@@ -120,7 +120,7 @@ service p2p_supplicant /system/bin/wpa_supplicant \
     oneshot
 
 # brcm-uim-sysfs (BT/FM/ANT+)
-service uim /system/bin/brcm-uim-sysfs
+service uim /system/vendor/bin/brcm-uim-sysfs
     class late_start
     user root
     group bluetooth net_bt_admin net_bt
