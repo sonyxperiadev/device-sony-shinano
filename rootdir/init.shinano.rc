@@ -23,8 +23,6 @@ on init
 on fs
     symlink /dev/block/platform/msm_sdcc.1 /dev/block/bootdevice
 
-    mount_all ./fstab.shinano
-    swapon_all ./fstab.shinano
     write /sys/kernel/boot_adsp/boot 1
 
 on boot
