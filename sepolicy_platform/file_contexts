@@ -2,26 +2,26 @@
 # Dev block nodes
 #
 /dev/block/mmcblk0                                             u:object_r:root_block_device:s0
-/dev/block/mmcblk0rpmb                                         u:object_r:rpmb_device:s0
+/dev/block/mmcblk0rpmb                                         u:object_r:rpmb_block_device:s0
 
-/dev/block/mmcblk1                                             u:object_r:sd_device:s0
-/dev/block/mmcblk1p1                                           u:object_r:sd_device:s0
+/dev/block/mmcblk1                                             u:object_r:sd_block_device:s0
+/dev/block/mmcblk1p1                                           u:object_r:sd_block_device:s0
 
-/dev/block/platform/msm_sdcc\.1/by-name/modemst1               u:object_r:modem_efs_partition_device:s0
-/dev/block/bootdevice/by-name/modemst1                         u:object_r:modem_efs_partition_device:s0
+/dev/block/platform/msm_sdcc\.1/by-name/modemst1               u:object_r:modem_block_device:s0
+/dev/block/bootdevice/by-name/modemst1                         u:object_r:modem_block_device:s0
 
-/dev/block/platform/msm_sdcc\.1/by-name/modemst2               u:object_r:modem_efs_partition_device:s0
-/dev/block/bootdevice/by-name/modemst2                         u:object_r:modem_efs_partition_device:s0
+/dev/block/platform/msm_sdcc\.1/by-name/modemst2               u:object_r:modem_block_device:s0
+/dev/block/bootdevice/by-name/modemst2                         u:object_r:modem_block_device:s0
 
-/dev/block/platform/msm_sdcc\.1/by-name/fsg                    u:object_r:modem_efs_partition_device:s0
-/dev/block/bootdevice/by-name/fsg                              u:object_r:modem_efs_partition_device:s0
+/dev/block/platform/msm_sdcc\.1/by-name/fsg                    u:object_r:modem_block_device:s0
+/dev/block/bootdevice/by-name/fsg                              u:object_r:modem_block_device:s0
 
-/dev/block/platform/msm_sdcc\.1/by-name/ssd                    u:object_r:ssd_device:s0
-/dev/block/bootdevice/by-name/ssd                              u:object_r:ssd_device:s0
+/dev/block/platform/msm_sdcc\.1/by-name/ssd                    u:object_r:ssd_block_device:s0
+/dev/block/bootdevice/by-name/ssd                              u:object_r:ssd_block_device:s0
 
-/dev/block/mmcblk0p1                                           u:object_r:trim_area_partition_device:s0
-/dev/block/platform/msm_sdcc\.1/by-name/TA                     u:object_r:trim_area_partition_device:s0
-/dev/block/bootdevice/by-name/TA                               u:object_r:trim_area_partition_device:s0
+/dev/block/mmcblk0p1                                           u:object_r:ta_block_device:s0
+/dev/block/platform/msm_sdcc\.1/by-name/TA                     u:object_r:ta_block_device:s0
+/dev/block/bootdevice/by-name/TA                               u:object_r:ta_block_device:s0
 
 /dev/block/platform/msm_sdcc\.1/by-name/userdata               u:object_r:userdata_block_device:s0
 /dev/block/bootdevice/by-name/userdata                         u:object_r:userdata_block_device:s0
