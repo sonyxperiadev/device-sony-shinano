@@ -80,4 +80,7 @@ TARGET_HAS_LEGACY_CAMERA_HAL1 := true
 # SELinux
 BOARD_SEPOLICY_DIRS += $(PLATFORM_COMMON_PATH)/sepolicy_platform
 
+# Platform witout a vendor partition
+TARGET_COPY_OUT_VENDOR := system/vendor
+
 include device/sony/common/CommonConfig.mk
