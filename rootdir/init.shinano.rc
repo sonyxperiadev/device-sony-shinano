@@ -20,19 +20,9 @@ import init.shinano.pwr.rc
 on init
     symlink /dev/block/platform/msm_sdcc.1 /dev/block/bootdevice
 
-on fs
-    write /sys/kernel/boot_adsp/boot 1
-
 on boot
     # Bluetooth
     chown system system /sys/devices/platform/bcmdhd_wlan/macaddr
-
-    # Cover mode
-    chown system system /sys/devices/virtual/input/clearpad/cover_mode_enabled
-    chown system system /sys/devices/virtual/input/clearpad/cover_win_bottom
-    chown system system /sys/devices/virtual/input/clearpad/cover_win_left
-    chown system system /sys/devices/virtual/input/clearpad/cover_win_right
-    chown system system /sys/devices/virtual/input/clearpad/cover_win_top
 
     # Tap to wake
     chown system system /sys/devices/virtual/input/max1187x/wakeup_gesture
@@ -122,10 +112,6 @@ service uim /system/vendor/bin/brcm-uim-sysfs
     group bluetooth net_bt_admin net_bt
     seclabel u:r:uim:s0
     writepid /dev/cpuset/system-background/tasks
-
-on property:vold.post_fs_data_done=1
-    # Generate Bluetooth MAC address file only when /data is ready
-    start macaddrsetup
 
 on property:bluetooth.isEnabled=true
     write /sys/class/bluetooth/hci0/idle_timeout 7000
