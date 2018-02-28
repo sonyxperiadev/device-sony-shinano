@@ -14,6 +14,7 @@
 
 # Platform path
 PLATFORM_COMMON_PATH := device/sony/shinano
+PRODUCT_PLATFORM_SOD := true
 
 TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
